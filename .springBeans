@@ -7,6 +7,10 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
+<<<<<<< HEAD
+=======
+		<config>java:timesheet.Application</config>
+>>>>>>> 76c3c65a4f8ca2e0a6abdb6e78a84a2b77caf4af
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
