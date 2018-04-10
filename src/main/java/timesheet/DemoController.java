@@ -11,8 +11,10 @@ import timesheet.models.Admin;
 import timesheet.models.AdminStore;
 import timesheet.models.Employee;
 import timesheet.models.EmployeeStore;
+import timesheet.models.ProjectStore;
 import timesheet.models.Supervisor;
 import timesheet.models.SupervisorStore;
+import timesheet.models.TimesheetStore;
 import timesheet.models.User;
 import timesheet.models.UserStore;
 
@@ -33,6 +35,12 @@ public class DemoController {
     
     @Autowired
     AdminStore adminStore;
+    
+    @Autowired
+    ProjectStore projectStore;
+    
+    @Autowired
+    TimesheetStore timesheetStore;
     
 
     @RequestMapping("/")
@@ -100,12 +108,14 @@ public class DemoController {
                 model.addAttribute("message", "Username unavailable");
                 return "register";
             } else {
-            	if(user_type=="employee") {
+            	String type = "supervisor";
+            	if(user_type.equalsIgnoreCase(type)) {
             		 userStore.save(new Supervisor(userName, password, fullName));
                      model.addAttribute("message", "New Supervisor Added: " + userName);
                      
             	}
             	else {
+            		System.out.println(user_type +"and " + model);
             		userStore.save(new Admin(userName, password, fullName));
             	}
             	return "home";

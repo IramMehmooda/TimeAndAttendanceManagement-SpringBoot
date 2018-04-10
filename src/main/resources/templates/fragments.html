@@ -28,6 +28,13 @@
                     <li th:classappend="${page == 'content' ? 'active' : ''}">
                         <a href="#" th:href="@{/content}">Content</a>
                     </li>
+                    <li th:classappend="${page == 'supervisorregister' ? 'active' : ''}">
+                        <a href="#" th:href="@{/supervisorregister}">Register Supervisor</a>
+                    </li>
+                    <li th:classappend="${page == 'projectRegister' ? 'active' : ''}">
+                        <a href="#" th:href="@{/projectRegister}">Register Project</a>
+                    </li>
+                    
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li th:unless="${user == null}">

@@ -1,11 +1,5 @@
-drop table Employee;
 
-select * from employee;
-select * from user;
-select * from Admin;
 show tables;
-
-select * from user;
 
 select * from user;
 
