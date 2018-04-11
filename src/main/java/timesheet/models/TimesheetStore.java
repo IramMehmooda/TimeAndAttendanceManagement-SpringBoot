@@ -9,6 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface TimesheetStore  extends CrudRepository<Timesheet, Long>{
 	public List<Timesheet> findAllTimesheet();
-	public Project findByEmployee();
+	public Project findByEmployee(Employee employee);
 
 }

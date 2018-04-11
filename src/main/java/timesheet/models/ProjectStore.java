@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public interface ProjectStore extends CrudRepository<Project, Long>{
-	public List<Project> findAllProjects();
-	public Project findByTitle();
+	//public List<Project> findAllProjects();
+	public Project findByTitle(String title);
 
 }
