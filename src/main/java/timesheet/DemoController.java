@@ -1,5 +1,7 @@
 package timesheet;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import timesheet.models.Admin;
 import timesheet.models.AdminStore;
 import timesheet.models.Employee;
 import timesheet.models.EmployeeStore;
+import timesheet.models.Project;
 import timesheet.models.ProjectStore;
 import timesheet.models.Supervisor;
 import timesheet.models.SupervisorStore;
@@ -41,6 +44,7 @@ public class DemoController {
     
     @Autowired
     TimesheetStore timesheetStore;
+    
     
 
     @RequestMapping("/")
@@ -101,23 +105,23 @@ public class DemoController {
     public String processSupervisorRegister(@RequestParam(value = "fullname") String fullName,
             @RequestParam(value = "username") String userName,
             @RequestParam(value = "password") String password,
-            @RequestParam(value = "type") String user_type,Model model) {
+            Model model) {
     	try {
     		User user = userStore.findByUsername(userName);
             if (user != null) {
-                model.addAttribute("message", "Username unavailable");
-                return "register";
+                model.addAttribute("message", "Username already taken");
+                return "supervisorregister";
             } else {
-            	String type = "supervisor";
-            	if(user_type.equalsIgnoreCase(type)) {
+//            	String type = "supervisor";
+//            	if(user_type.equalsIgnoreCase(type)) {
             		 userStore.save(new Supervisor(userName, password, fullName));
                      model.addAttribute("message", "New Supervisor Added: " + userName);
                      
-            	}
-            	else {
-            		System.out.println(user_type +"and " + model);
-            		userStore.save(new Admin(userName, password, fullName));
-            	}
+//            	}
+//            	else {
+//            		System.out.println(user_type +"and " + model);
+//            		userStore.save(new Admin(userName, password, fullName));
+//            	}
             	return "home";
             }
     		
@@ -126,6 +130,7 @@ public class DemoController {
     	}
     }
 
+    
     @PostMapping("/register")
     public String processRegister(@RequestParam(value = "fullname") String fullName,
                                   @RequestParam(value = "username") String userName,
@@ -161,6 +166,30 @@ public class DemoController {
     	}
         
     }
+    @PostMapping("/projectregister")
+    public String projectRegister(@RequestParam(value = "title") String title,
+            @RequestParam(value = "budget") long budget,
+            @RequestParam(value = "customer") String customer,
+            @RequestParam(value = "supervisor", required = false) Supervisor supervisor,Model model) {
+    	try {
+    		Project project = projectStore.findByTitle(title);
+            if (project != null) {
+                model.addAttribute("message", "Project Title already exists!");
+                return "projectregister";
+            } else {
+            	//String username = supervisor;
+            	//Supervisor s1 = supervisorStore.findByUsername(username);
+            	projectStore.save(new Project(title,budget,customer,supervisor,null));
+            	model.addAttribute("message","Project "+title+" Added");
+            		
+           
+            	return "home";
+            }
+    		
+    	}catch(Exception ex) {
+    		return "user not found"+ex.getMessage();
+    	}
+    }
 
     @GetMapping("/register")
     public String showRegister(Model model) {
@@ -180,10 +209,27 @@ public class DemoController {
             return "supervisorregister";
         } else {
         	
-            model.addAttribute("message", "Please login first"+model.asMap());
+            model.addAttribute("message", "Please login first");
             return "home";
         }
     }
+    
+    @GetMapping("/projectregister")
+    public String showProjectRegister(Model model) {
+        if (model.asMap().containsKey("User")) {
+        	
+        	List<Supervisor> supervisor = (List<Supervisor>) supervisorStore.findAll();
+        	
+        	model.addAttribute("supervisor",supervisor);
+        	
+            return "projectregister";
+        } else {
+        	
+            model.addAttribute("message", "Please login first");
+            return "home";
+        }
+    }
+    
     
     @RequestMapping("/logout")
     public String logout(Model model, SessionStatus sessionStatus) {

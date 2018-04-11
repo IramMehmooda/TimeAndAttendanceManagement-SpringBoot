@@ -2,7 +2,7 @@
  * 
  */
 package timesheet.models;
-import java.util.List;
+
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public interface ProjectStore extends CrudRepository<Project, Long>{
-	//public List<Project> findAllProjects();
+	Iterable<Project> findAll();
 	public Project findByTitle(String title);
 
 }

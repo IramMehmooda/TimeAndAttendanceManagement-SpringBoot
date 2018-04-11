@@ -17,13 +17,13 @@ public class Timesheet {
 	
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-	int id;
+	int timesheet_id;
 	
 	@OneToOne
-	@JoinColumn(name="id")
+	@JoinColumn(name="user_id")
 	private Employee employee;
 	@OneToOne
-	@JoinColumn(name="id")
+	@JoinColumn(name="project_id")
 	private Project project;
 	
 	Date date;
@@ -47,89 +47,77 @@ public class Timesheet {
 		e.printStackTrace();
 	}
 	}
-	public Timesheet(Employee employee, Project project, Date date, String from_time, String to_time,
-			SimpleDateFormat format, Date d1, Date d2) {
+
+	public Timesheet(Employee employee, Project project, Date date, String from_time, String to_time) {
+		super();
 		this.employee = employee;
 		this.project = project;
 		this.date = date;
 		this.from_time = from_time;
 		this.to_time = to_time;
-		this.format = format;
-		this.d1 = d1;
-		this.d2 = d2;
 	}
 
-	public int getId() {
-		return id;
+	public int getTimesheet_id() {
+		return timesheet_id;
+	}
+
+	public void setTimesheet_id(int timesheet_id) {
+		this.timesheet_id = timesheet_id;
 	}
 
 	public Employee getEmployee() {
 		return employee;
 	}
 
-	public Project getProject() {
-		return project;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public String getFrom_time() {
-		return from_time;
-	}
-
-	public String getTo_time() {
-		return to_time;
-	}
-
-	public SimpleDateFormat getFormat() {
-		return format;
-	}
-
-	public long gethours() {
-		return hours;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
+	}
+
+	public Project getProject() {
+		return project;
 	}
 
 	public void setProject(Project project) {
 		this.project = project;
 	}
 
+	public Date getDate() {
+		return date;
+	}
+
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public String getFrom_time() {
+		return from_time;
 	}
 
 	public void setFrom_time(String from_time) {
 		this.from_time = from_time;
 	}
 
+	public String getTo_time() {
+		return to_time;
+	}
+
 	public void setTo_time(String to_time) {
 		this.to_time = to_time;
 	}
 
-	public void setFormat(SimpleDateFormat format) {
-		this.format = format;
+	public long getHours() {
+		return hours;
 	}
 
-	public void sethours(long hours) {
+	public void setHours(long hours) {
 		this.hours = hours;
 	}
 
 	@Override
 	public String toString() {
-		return "Timesheet [id=" + id + ", project=" + project + ", date=" + date + ", from_time=" + from_time
-				+ ", to_time=" + to_time + ", format=" + format + ", Hours=" + hours + "]";
+		return "Timesheet [timesheet_id=" + timesheet_id + ", employee=" + employee + ", project=" + project + ", date="
+				+ date + ", from_time=" + from_time + ", to_time=" + to_time + ", hours=" + hours + "]";
 	}
-	
-	
 	
 	
 	

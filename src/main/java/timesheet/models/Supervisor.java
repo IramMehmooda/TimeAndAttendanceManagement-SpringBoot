@@ -1,6 +1,10 @@
 package timesheet.models;
 
+import java.util.Set;
+
 import javax.persistence.*;
+
+
 
 
 @Entity
@@ -10,16 +14,16 @@ public class Supervisor extends User{
 
 	String fullname;
 	
+	@OneToMany(mappedBy = "supervisor" , cascade= CascadeType.ALL,fetch = FetchType.LAZY)
+	private Set<Project> projects;
+	
 	
 
 	public Supervisor() {
 		super();
 	}
 
-	public Supervisor(String username, String password, String fullname) {
-		super(username, password);
-		this.fullname = fullname;
-	}
+	
 
 	public String getFullname() {
 		return fullname;
@@ -29,9 +33,24 @@ public class Supervisor extends User{
 		this.fullname = fullname;
 	}
 
-	@Override
-	public String toString() {
-		return "Supervisor [fullname=" + fullname + "]";
+	public Set<Project> getProjects() {
+		return projects;
 	}
+
+	public void setProjects(Set<Project> projects) {
+		this.projects = projects;
+	}
+
+	public Supervisor(String username, String password,String fullname) {
+		super(username, password);
 		
+		this.fullname=fullname;
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	
+
+	
+	
 }

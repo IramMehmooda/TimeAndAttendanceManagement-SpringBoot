@@ -23,6 +23,8 @@ public class DemoErrorController implements ErrorController {
     public ModelAndView error(HttpServletRequest request) {
         RequestAttributes attrs = new ServletRequestAttributes(request);
         Map<String, Object> errMap = errorAttributes.getErrorAttributes(attrs, true);
+        System.out.println(attrs);
+        System.out.println(errMap);
         // errMap.forEach((k,v) -> System.out.println(k + ": " + v));
         return new ModelAndView("error", errMap);
     }
