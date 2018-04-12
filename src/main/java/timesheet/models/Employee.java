@@ -1,5 +1,6 @@
 package timesheet.models;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -21,7 +22,11 @@ public class Employee extends User{
     long SSN;
     
     @ManyToMany(mappedBy = "emplist")
-    private Set<Project> project;
+    private List<Project> project;
+
+	public Employee() {
+		super();
+	}
 
 	public Employee(String fullname, String address, String email, long phone_no, String job_title, int salary,
 			long sSN) {
@@ -47,6 +52,13 @@ public class Employee extends User{
 		SSN = sSN;
 		
 		// TODO Auto-generated constructor stub
+	}
+
+
+	@Override
+	public String toString() {
+		return "Employee [fullname=" + fullname + ", address=" + address + ", email=" + email + ", phone_no=" + phone_no
+				+ ", job_title=" + job_title + ", salary=" + salary + ", SSN=" + SSN + ", project=" + project + "]";
 	}
 
 	public String getFullname() {
@@ -105,11 +117,11 @@ public class Employee extends User{
 		SSN = sSN;
 	}
 
-	public Set<Project> getProject() {
+	public List<Project> getProject() {
 		return project;
 	}
 
-	public void setProject(Set<Project> project) {
+	public void setProject(List<Project> project) {
 		this.project = project;
 	}
 	

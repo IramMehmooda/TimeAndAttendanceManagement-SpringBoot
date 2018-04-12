@@ -1,5 +1,8 @@
 package timesheet.service;
 
+import java.util.List;
+
+import timesheet.models.Employee;
 import timesheet.models.Supervisor;
 
 public class ProjectCreateRequest{
@@ -7,6 +10,15 @@ public class ProjectCreateRequest{
 	private int budget;
 	private String customer;
 	private Supervisor supervisorname;
+	private List<Employee> employeelist;
+	
+	
+	public List<Employee> getEmployeelist() {
+		return employeelist;
+	}
+	public void setEmployeelist(List<Employee> employeelist) {
+		this.employeelist = employeelist;
+	}
 	public String getTitle() {
 		return title;
 	}

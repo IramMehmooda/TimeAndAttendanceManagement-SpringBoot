@@ -2,6 +2,7 @@ package timesheet.models;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -32,7 +33,7 @@ public class Project {
             joinColumns = {@JoinColumn(name = "project_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id")}
     )
-	private Set<Employee> emplist;
+	private List<Employee> emplist;
 
 
 
@@ -96,19 +97,19 @@ public class Project {
 
 
 
-	public Set<Employee> getEmplist() {
+	public List<Employee> getEmplist() {
 		return emplist;
 	}
 
 
 
-	public void setEmplist(Set<Employee> emplist) {
+	public void setEmplist(List<Employee> emplist) {
 		this.emplist = emplist;
 	}
 
 
 
-	public Project(String title, long budget, String customer, Supervisor supervisor, Set<Employee> emplist) {
+	public Project(String title, long budget, String customer, Supervisor supervisor, List<Employee> emplist) {
 		super();
 		this.title = title;
 		this.budget = budget;

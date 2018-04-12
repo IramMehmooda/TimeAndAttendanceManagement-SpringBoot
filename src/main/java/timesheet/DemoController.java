@@ -1,14 +1,19 @@
 package timesheet;
 
+
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+
 
 import timesheet.models.Admin;
 import timesheet.models.AdminStore;
@@ -73,6 +78,63 @@ public class DemoController {
         }
     }
 */
+  
+    ///////////////////////////////////////////////////////////////////
+    
+    
+    
+    @ModelAttribute("allemployees")
+    public List<Employee> populateEmployees() {
+        return  (List<Employee>) this.employeeStore.findAll();
+    }
+    
+ /*   
+    @ModelAttribute("allSeedStarters")
+    public List<Project> populateSeedStarters() {
+        return this.seedStarterService.findAll();
+    }
+    
+   */ 
+  
+    
+    
+    
+    @RequestMapping(value="/projectregister", params={"save"})
+    public String saveSeedstarter(final Project project, final BindingResult bindingResult, final ModelMap model) {
+        if (bindingResult.hasErrors()) {
+            return "projectregister";
+        }
+        this.projectStore.save(project);
+        model.clear();
+        return "redirect:/content";
+    }
+    
+
+    
+    @RequestMapping(value="/projectregister", params={"addRow"})
+    public String addRow(final Project project, final BindingResult bindingResult) {
+        project.getEmplist().add(new Employee());
+
+        return "projectregister";
+    }
+    
+    
+    @RequestMapping(value="/projectregister", params={"removeRow"})
+    public String removeRow(final Project project, final BindingResult bindingResult, final HttpServletRequest req) {
+        final Integer rowId = Integer.valueOf(req.getParameter("removeRow"));
+        System.out.println(rowId);
+        project.getEmplist().remove(rowId.intValue());
+        //seedStarter.getRows().remove(rowId.intValue());
+        return "seedstartermng";
+    }
+    
+    
+    
+    ////////////////////////////////////////////////////////////////////////////////////
+    
+    
+    
+    
     
     @PostMapping("/login")
     public String processLogin(@RequestParam(value = "username") String userName,
@@ -206,9 +268,8 @@ public class DemoController {
     
     
     @PostMapping("/projectregister")
-    public String projectRegister(@ModelAttribute("project") ProjectCreateRequest project,@ModelAttribute("supervisor") String supervisorname,Model model , BindingResult result) {
+    public String projectRegister(@ModelAttribute("project") ProjectCreateRequest project,@ModelAttribute("supervisor") String supervisorname,@ModelAttribute("employees") List<Employee> employees,Model model , BindingResult result) {
     	if(!result.hasErrors()) {
-    		System.out.println(project);
     		long budget = (long)project.getBudget();
     		String title = project.getTitle();
     		String customer = project.getCustomer();
@@ -216,8 +277,9 @@ public class DemoController {
     		System.out.println(project.getSupervisorname());
     		System.out.println(supervisorname +"yes got it");
     		Supervisor supervisor = supervisorStore.findByUsername(supervisorname);
+    		 List<Employee> employeelist = project.getEmployeelist();
     		
-    		projectStore.save(new Project(title,budget,customer,supervisor,null));
+    		projectStore.save(new Project(title,budget,customer,supervisor,employeelist));
     		//save project
     	}
     	return "redirect:/";
@@ -251,7 +313,10 @@ public class DemoController {
 //    @RequestParam(value="supervisorname", defaultValue="0")String supervisorname
     public String showProjectRegister(Model model) {
         if (model.asMap().containsKey("User")) {
+        	List<Employee> employees =  (List<Employee>) employeeStore.findAll();
+        	model.addAttribute(employees);
         	Project project = new Project();
+        	
         	model.addAttribute(project);
         	Supervisor supervisor = new Supervisor();
         	model.addAttribute(supervisor);
