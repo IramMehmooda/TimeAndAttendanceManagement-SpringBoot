@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -20,9 +21,10 @@ import timesheet.models.SupervisorStore;
 import timesheet.models.TimesheetStore;
 import timesheet.models.User;
 import timesheet.models.UserStore;
+import timesheet.service.ProjectCreateRequest;
 
 @Controller
-@SessionAttributes("User")
+@SessionAttributes({"User","Supervisor"})
 @ComponentScan("timesheet.models")
 public class DemoController {
 
@@ -61,6 +63,17 @@ public class DemoController {
         }
     }
 
+/*    @RequestMapping("/projectregister")
+    public String projectregister(Model model) {
+        if (model.asMap().containsKey(("User"))) {
+        	System.out.println("This loop is working" + model.asMap());
+            return "content";
+        } else {
+            return "home";
+        }
+    }
+*/
+    
     @PostMapping("/login")
     public String processLogin(@RequestParam(value = "username") String userName,
                                @RequestParam(value = "password") String password,
@@ -166,11 +179,9 @@ public class DemoController {
     	}
         
     }
-    @PostMapping("/projectregister")
-    public String projectRegister(@RequestParam(value = "title") String title,
-            @RequestParam(value = "budget") long budget,
-            @RequestParam(value = "customer") String customer,
-            @RequestParam(value = "supervisor", required = false) Supervisor supervisor,Model model) {
+/*  @PostMapping("/projectregister")
+    public String projectRegister(
+            @ModelAttribute("supervisorname") String supervisorname,Model model) {
     	try {
     		Project project = projectStore.findByTitle(title);
             if (project != null) {
@@ -178,8 +189,9 @@ public class DemoController {
                 return "projectregister";
             } else {
             	//String username = supervisor;
-            	//Supervisor s1 = supervisorStore.findByUsername(username);
-            	projectStore.save(new Project(title,budget,customer,supervisor,null));
+            	Supervisor s1 = supervisorStore.findByUsername(supervisorname);
+            	System.out.println(supervisorname);
+            		projectStore.save(new Project(title,budget,customer,s1,null));
             	model.addAttribute("message","Project "+title+" Added");
             		
            
@@ -189,7 +201,28 @@ public class DemoController {
     	}catch(Exception ex) {
     		return "user not found"+ex.getMessage();
     	}
+    }*/
+    
+    
+    
+    @PostMapping("/projectregister")
+    public String projectRegister(@ModelAttribute("project") ProjectCreateRequest project,@ModelAttribute("supervisor") String supervisorname,Model model , BindingResult result) {
+    	if(!result.hasErrors()) {
+    		System.out.println(project);
+    		long budget = (long)project.getBudget();
+    		String title = project.getTitle();
+    		String customer = project.getCustomer();
+    		System.out.println(project.getCustomer());
+    		System.out.println(project.getSupervisorname());
+    		System.out.println(supervisorname +"yes got it");
+    		Supervisor supervisor = supervisorStore.findByUsername(supervisorname);
+    		
+    		projectStore.save(new Project(title,budget,customer,supervisor,null));
+    		//save project
+    	}
+    	return "redirect:/";
     }
+
 
     @GetMapping("/register")
     public String showRegister(Model model) {
@@ -215,12 +248,16 @@ public class DemoController {
     }
     
     @GetMapping("/projectregister")
+//    @RequestParam(value="supervisorname", defaultValue="0")String supervisorname
     public String showProjectRegister(Model model) {
         if (model.asMap().containsKey("User")) {
-        	
-        	List<Supervisor> supervisor = (List<Supervisor>) supervisorStore.findAll();
-        	
-        	model.addAttribute("supervisor",supervisor);
+        	Project project = new Project();
+        	model.addAttribute(project);
+        	Supervisor supervisor = new Supervisor();
+        	model.addAttribute(supervisor);
+        	List<Supervisor> supervisors = (List<Supervisor>) supervisorStore.findAll();
+        	model.addAttribute("supervisors",supervisors);
+        	//model.addAttribute("supervisor", supervisor);
         	
             return "projectregister";
         } else {
