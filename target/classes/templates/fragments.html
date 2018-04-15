@@ -28,11 +28,17 @@
                     <li th:classappend="${page == 'content' ? 'active' : ''}">
                         <a href="#" th:href="@{/content}">Content</a>
                     </li>
+                    <li th:classappend="${page == 'register' ? 'active' : ''}">
+                        <a href="#" th:href="@{/register}">Add Employee</a>
+                    </li>
                     <li th:classappend="${page == 'supervisorregister' ? 'active' : ''}">
-                        <a href="#" th:href="@{/supervisorregister}">Register Supervisor</a>
+                        <a href="#" th:href="@{/supervisorregister}">Add Supervisor</a>
                     </li>
                     <li th:classappend="${page == 'projectregister' ? 'active' : ''}">
-                        <a href="#" th:href="@{/projectregister}">Register Project</a>
+                        <a href="#" th:href="@{/projectregister}">Add Project</a>
+                    </li>
+                    <li th:classappend="${page == 'addtimesheet' ? 'active' : ''}">
+                        <a href="#" th:href="@{/addtimesheet}">Add Timesheet</a>
                     </li>
                     <li th:classappend="${page == 'maintainemployees' ? 'active' : ''}">
                         <a href="#" th:href="@{/maintainemployees}">Maintain Employees</a>

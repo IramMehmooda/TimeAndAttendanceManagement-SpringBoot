@@ -3,12 +3,17 @@ package timesheet.models;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 
 
 @Entity
@@ -19,18 +24,20 @@ public class Timesheet {
     @GeneratedValue(strategy=GenerationType.AUTO)
 	int timesheet_id;
 	
-	@OneToOne
+	@ManyToOne( fetch = FetchType.LAZY)
 	@JoinColumn(name="user_id")
-	private Employee employee;
+	private User user;
+	
 	@OneToOne
 	@JoinColumn(name="project_id")
 	private Project project;
 	
-	Date date;
 	String from_time;
 	String to_time;
 	long hours;
 	
+	@Temporal (TemporalType.DATE)
+	Date date;
 	
 	SimpleDateFormat format=new SimpleDateFormat("HH:mm");
 	Date d1;
@@ -47,32 +54,32 @@ public class Timesheet {
 		e.printStackTrace();
 	}
 	}
-
-	public Timesheet(Employee employee, Project project, Date date, String from_time, String to_time) {
+	
+	public Timesheet(User user, Project project, Date date, String from_time, String to_time) {
 		super();
-		this.employee = employee;
+		this.user = user;
 		this.project = project;
 		this.date = date;
 		this.from_time = from_time;
 		this.to_time = to_time;
 	}
-
+	
 	public int getTimesheet_id() {
 		return timesheet_id;
 	}
-
+	
 	public void setTimesheet_id(int timesheet_id) {
 		this.timesheet_id = timesheet_id;
 	}
-
-	public Employee getEmployee() {
-		return employee;
+	
+	public User getUser() {
+		return user;
 	}
-
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
+	
+	public void setUser(User employee) {
+		this.user = employee;
 	}
-
+	
 	public Project getProject() {
 		return project;
 	}
@@ -115,9 +122,11 @@ public class Timesheet {
 
 	@Override
 	public String toString() {
-		return "Timesheet [timesheet_id=" + timesheet_id + ", employee=" + employee + ", project=" + project + ", date="
-				+ date + ", from_time=" + from_time + ", to_time=" + to_time + ", hours=" + hours + "]";
+		return "Timesheet [timesheet_id=" + timesheet_id + ", user=" + user + ", project=" + project + ", from_time="
+				+ from_time + ", to_time=" + to_time + ", hours=" + hours + ", date=" + date + "]";
 	}
+
+	
 	
 	
 	
