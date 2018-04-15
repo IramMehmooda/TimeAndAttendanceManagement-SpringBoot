@@ -47,6 +47,13 @@ public class Supervisor extends User{
 		this.fullname=fullname;
 		// TODO Auto-generated constructor stub
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "Supervisor [fullname=" + fullname + ", projects=" + projects + ", toString()=" + super.toString() + "]";
+	}
 	
 	
 	

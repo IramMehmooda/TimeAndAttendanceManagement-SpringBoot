@@ -1,6 +1,7 @@
 package timesheet;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -222,18 +223,17 @@ public class DemoController {
     	try {
     		User user = userStore.findByUsername(userName);
             if (user != null) {
-                model.addAttribute("message", "Username unavailable");
+                model.addAttribute("message", "Username already available, please try other username");
                 return "register";
             } else {
-            	if(user_type=="employee") {
+            	
             		 userStore.save(new Employee(userName, password,fullName, address, email, phone_no, job_title, salary, sSN));
                      model.addAttribute("message", "New Employee Added: " + userName);
-                     
-            	}
-            	else {
-            		userStore.save(new Admin(userName, password, fullName));
-            	}
-            	return "home";
+                    // userStore.save(new Admin(userName, password, fullName));
+            	
+            	
+            		
+            	return "content";
             }
     		
     	}catch(Exception ex) {
@@ -268,18 +268,17 @@ public class DemoController {
     
     
     @PostMapping("/projectregister")
-    public String projectRegister(@ModelAttribute("project") ProjectCreateRequest project,@ModelAttribute("supervisor") String supervisorname,@ModelAttribute("employees") List<Employee> employees,Model model , BindingResult result) {
+    public String projectRegister(@ModelAttribute("project") ProjectCreateRequest project,@ModelAttribute("supervisor") String supervisorname,@ModelAttribute("emplist") String employees,Model model , BindingResult result) {
     	if(!result.hasErrors()) {
     		long budget = (long)project.getBudget();
     		String title = project.getTitle();
     		String customer = project.getCustomer();
     		System.out.println(project.getCustomer());
     		System.out.println(project.getSupervisorname());
-    		System.out.println(supervisorname +"yes got it");
+    		System.out.println(employees +"yes got it");
     		Supervisor supervisor = supervisorStore.findByUsername(supervisorname);
-    		 List<Employee> employeelist = project.getEmployeelist();
     		
-    		projectStore.save(new Project(title,budget,customer,supervisor,employeelist));
+    		projectStore.save(new Project(title,budget,customer,supervisor,null));
     		//save project
     	}
     	return "redirect:/";
@@ -314,7 +313,10 @@ public class DemoController {
     public String showProjectRegister(Model model) {
         if (model.asMap().containsKey("User")) {
         	List<Employee> employees =  (List<Employee>) employeeStore.findAll();
-        	model.addAttribute(employees);
+        	System.out.println(employees);
+        	model.addAttribute("employees",employees);
+        	List<Employee> emplist = new ArrayList<Employee>();
+        	model.addAttribute(emplist);
         	Project project = new Project();
         	
         	model.addAttribute(project);

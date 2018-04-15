@@ -1,6 +1,6 @@
 
 show tables;
-select * from project;
+select * from user where username="Lesly";
 
 
 drop table employee;

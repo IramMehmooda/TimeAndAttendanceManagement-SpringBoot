@@ -55,10 +55,13 @@ public class Employee extends User{
 	}
 
 
+	
+
 	@Override
 	public String toString() {
 		return "Employee [fullname=" + fullname + ", address=" + address + ", email=" + email + ", phone_no=" + phone_no
-				+ ", job_title=" + job_title + ", salary=" + salary + ", SSN=" + SSN + ", project=" + project + "]";
+				+ ", job_title=" + job_title + ", salary=" + salary + ", SSN=" + SSN + ", project=" + project
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 	public String getFullname() {
