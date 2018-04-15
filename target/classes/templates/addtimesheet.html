@@ -9,14 +9,16 @@
 <!--     <form action="#" th:object="${supervisorname}"   th:object="${supervisors}" method="POST" class="form-horizontal" > -->
 		
 		<form  method="POST" class="form-horizontal" action="#" th:object="${timesheet}" >
-		<div th:unless="${user == null}">
-                        <p class="navbar-text" th:value="${user.getUser_id()}" th:text="${user.getUser_id()} "></p>
+		<div>
+		Username: 
+		<p class="navbar-text" th:value="${username}" th:text="${username} "></p>
                     </div>
 		
 		<div>
-		Select a project:
+		
+		<!-- Select a project:
         <select class="form-control" th:field="*{projects}">
-<!--     <option value="0" th:text="select Supervisor" ></option> -->
+    <option value="0" th:text="select Supervisor" ></option>
     <option th:each="supervisor : ${supervisors}" th:value="${supervisor.username}" th:text="${supervisor.username}">
     </option>
     </select>
@@ -35,7 +37,7 @@
             </div>
        
             <div class="form-group">
-<!--             <label class="control-label col-sm-2" for="supervisors">Supervisors:</label> -->
+            <label class="control-label col-sm-2" for="supervisors">Supervisors:</label>
             Supervisor: 
             
     
@@ -68,8 +70,8 @@
                   </td>
                   <td th:text="${emplist.user_id}"> </td>
                   
-                <!-- <td>   <input type="text" th:field="*{emplist[__${rowStat.index}__].job_title}" th:errorclass="fieldError" />
-                  </td> -->
+                <td>   <input type="text" th:field="*{emplist[__${rowStat.index}__].job_title}" th:errorclass="fieldError" />
+                  </td>
                   <td>
                     <button type="submit"  name="removeRow" th:value="${rowStat.index}" th:text="#{project.emplist.remove}">Remove row</button>
                   </td>
@@ -78,10 +80,10 @@
             </table>
               </div>
            
-                <!-- <input id="type" type="text" name="type" th:required="required"
-                       autocomplete="new-password"/>  -->
+                <input id="type" type="text" name="type" th:required="required"
+                       autocomplete="new-password"/> 
             
-            
+             -->
             
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

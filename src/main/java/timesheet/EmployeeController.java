@@ -53,7 +53,6 @@ public class EmployeeController {
 	
 	
 	    @GetMapping("/maintainemployees")
-//	    @RequestParam(value="supervisorname", defaultValue="0")String supervisorname
 	    public String showProjectRegister(Model model) {
 	        if (model.asMap().containsKey("User")) {
 	        	List<Employee> employees =  (List<Employee>) employeeStore.findAll();
