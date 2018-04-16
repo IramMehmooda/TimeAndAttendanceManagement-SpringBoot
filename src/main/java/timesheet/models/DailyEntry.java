@@ -1,16 +1,26 @@
 package timesheet.models;
 
 import java.sql.Time;
+import java.time.LocalDateTime;
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 
+@Entity
+@Table(name="dailyentry")
 public class DailyEntry {
 	
 	@Id
@@ -18,17 +28,21 @@ public class DailyEntry {
 	private Long id;
 	
 	@Temporal(TemporalType.DATE)
-	Date date;
+	private Date date;
 	
 	
 	@Temporal(TemporalType.TIME)
-	Time fromtime;
+	
+	private Date fromtime;
 	
 	
 	@Temporal(TemporalType.TIME)
-	Time totime;
+	private Date totime;
 	
 	
+	@ManyToOne( fetch = FetchType.LAZY)
+	@JoinColumn(name="timesheet_id")
+	Timesheet timesheet;
 	
 	@ManyToOne
 	Project project;
@@ -79,19 +93,19 @@ public class DailyEntry {
 		this.date = date;
 	}
 
-	public Time getFromtime() {
+	public Date getFromtime() {
 		return fromtime;
 	}
 
-	public void setFromtime(Time fromtime) {
+	public void setFromtime(Date fromtime) {
 		this.fromtime = fromtime;
 	}
 
-	public Time getTotime() {
+	public Date getTotime() {
 		return totime;
 	}
 
-	public void setTotime(Time totime) {
+	public void setTotime(Date totime) {
 		this.totime = totime;
 	}
 

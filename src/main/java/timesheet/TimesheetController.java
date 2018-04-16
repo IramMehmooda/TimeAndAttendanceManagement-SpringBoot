@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 
 import timesheet.Utils;
+import timesheet.models.DailyEntryStore;
 import timesheet.models.Employee;
 import timesheet.models.EmployeeStore;
 import timesheet.models.Project;
@@ -45,6 +46,11 @@ public class TimesheetController {
 	
 	@Autowired
 	ProjectStore projectStore;
+
+	
+
+    @Autowired
+    DailyEntryStore dailyEntryStore;
 	
 	@GetMapping(value="/listTimesheets")
     public String listTimeSheets( Model model) {

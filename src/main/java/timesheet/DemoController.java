@@ -18,6 +18,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import timesheet.models.Admin;
 import timesheet.models.AdminStore;
+import timesheet.models.DailyEntryStore;
 import timesheet.models.Employee;
 import timesheet.models.EmployeeStore;
 import timesheet.models.Project;
@@ -53,6 +54,9 @@ public class DemoController {
     @Autowired
     TimesheetStore timesheetStore;
     
+    
+    @Autowired
+    DailyEntryStore dailyEntryStore;
     
 
     @RequestMapping("/")
