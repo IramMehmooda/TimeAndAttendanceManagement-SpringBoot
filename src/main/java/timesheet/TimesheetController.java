@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 
 import timesheet.Utils;
+import timesheet.models.DailyEntry;
 import timesheet.models.DailyEntryStore;
 import timesheet.models.Employee;
 import timesheet.models.EmployeeStore;
@@ -58,11 +59,22 @@ public class TimesheetController {
         return "listTimesheets";
     }
 	
+	
+	
     @GetMapping(value="/createTimesheet")
     public String addTimeSheetForm(Model model, @RequestParam(name="userid") Long userid) {
        	model.addAttribute("timesheet", new Timesheet());
        	model.addAttribute("userid", userid);//should be retrieved from session
         return "createTimesheet";
+    }
+    
+    
+    /////////////////////////////////////////////////////////////////////////  made to add entries in timesheet
+    @GetMapping(value="/createentries")
+    public void addEntries(Model model) {
+    	model.addAttribute("dailyEntry", new DailyEntry());
+    	
+    	
     }
 
     @PostMapping(value="/createTimesheet")
