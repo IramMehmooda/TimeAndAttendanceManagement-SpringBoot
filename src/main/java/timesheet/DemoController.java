@@ -130,7 +130,7 @@ public class DemoController {
         System.out.println(rowId);
         project.getEmplist().remove(rowId.intValue());
         //seedStarter.getRows().remove(rowId.intValue());
-        return "seedstartermng";
+        return "projectregister";
     }
     
     

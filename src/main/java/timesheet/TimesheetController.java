@@ -4,17 +4,21 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.hibernate.annotations.GenerationTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -62,9 +66,9 @@ public class TimesheetController {
 	
 	
     @GetMapping(value="/createTimesheet")
-    public String addTimeSheetForm(Model model, @RequestParam(name="userid") Long userid) {
+    public String addTimeSheetForm(Model model) {
        	model.addAttribute("timesheet", new Timesheet());
-       	model.addAttribute("userid", userid);//should be retrieved from session
+       	//should be retrieved from session
         return "createTimesheet";
     }
     
@@ -120,6 +124,21 @@ public class TimesheetController {
 	public List<Timesheet> listTimesheets() {
 		return Utils.toList(timesheetStore.findAll());
 	}
+	
+	  @RequestMapping(value="/createTimesheet", params={"addRow"})
+	    public String addRow(final Timesheet timesheet, final BindingResult bindingResult) {
+	      timesheet.getEntries().add(new DailyEntry());  
+		  return "createTimesheet";
+	    }
+	    
+	    
+	    @RequestMapping(value="/createTimesheet", params={"removeRow"})
+	    public String removeRow(final Timesheet timesheet, final BindingResult bindingResult, final HttpServletRequest req) {
+	        final Integer rowId = Integer.valueOf(req.getParameter("removeRow"));
+	        timesheet.getEntries().remove(rowId.intValue());
+	        
+	        return "createTimesheet";
+	    }
 	
 	
   

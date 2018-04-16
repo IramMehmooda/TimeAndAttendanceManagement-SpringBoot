@@ -5,7 +5,9 @@ drop table user;
 drop table dailyentry;
 drop table project;
 
-select * from daily_entry;
+select * from user;
+select * from timesheet;
+select * from dailyentry;
 select * from user where user_type="supervisor";
 select * from user where user_type="admin";
 
@@ -43,8 +45,13 @@ insert into user(username,password,user_type,fullname,address,email,phone_no,job
 
 
 
+insert into timesheet(end_date,startdate,user_user_id) values(DATE '2018-04-16',DATE '2018-04-16',1003);
 
 
+
+
+
+insert into dailyentry(id,date,fromtime,totime,noofhours,project_project_id,timesheet_id,user_user_id) values (8001,)
 
 
 
