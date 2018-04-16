@@ -2,6 +2,7 @@ package timesheet.models;
 
 
 
+import org.hibernate.sql.Update;
 import org.springframework.data.jpa.repository.Query;
 
 //import java.util.List;
@@ -19,6 +20,8 @@ public interface UserBaseStore<T extends User> extends CrudRepository<T, Long>{
 	public void deleteByUserid(int user_id);
 	
 	public void deleteByUsername(String username);
+	
+	
 	
 	
 	

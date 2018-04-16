@@ -98,8 +98,14 @@ public class EmployeeController {
 	    		
 			
 		}
+	    
+	    /*@RequestMapping(value="/maintianemployees/edit/{username}")
+	    public String edit(@PathVariable String username, Model model) {
+	    	model.addAttribute("employee",employeeStore.findByUsername(username));
+	    	return "register";
+	    }
 	
-	
+	*/
 	
 
 }
