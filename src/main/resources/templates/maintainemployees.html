@@ -34,6 +34,11 @@
 			  <button type="submit">Delete</button>
 		  </form>
         </td>
+        <td>
+          <form action="#" th:action="@{/maintainemployees/edit/}+${emp.username}">
+			  <button type="submit">Edit</button>
+		  </form>
+        </td>
        <!--  <td>
           <form action="#" th:action="@{'/createTimesheet'}" th:method="get" >
           	  <input type="hidden" name="employeeId" th:value="${e.id}"/>
