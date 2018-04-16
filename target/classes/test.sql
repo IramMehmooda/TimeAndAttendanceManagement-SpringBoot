@@ -6,6 +6,8 @@ drop table dailyentry;
 drop table project;
 
 select * from user;
+select * from project;
+select * from project_employee;
 select * from timesheet;
 select * from dailyentry;
 select * from user where user_type="supervisor";

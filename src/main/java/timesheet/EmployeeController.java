@@ -53,7 +53,7 @@ public class EmployeeController {
 	
 	
 	    @GetMapping("/maintainemployees")
-	    public String showProjectRegister(Model model) {
+	    public String showEmployeeRegister(Model model) {
 	        if (model.asMap().containsKey("User")) {
 	        	List<Employee> employees =  (List<Employee>) employeeStore.findAll();
 	        	System.out.println(employees);
@@ -92,15 +92,10 @@ public class EmployeeController {
 	    
 	    
 	    @RequestMapping(value="/maintainemployees", method=RequestMethod.DELETE)
-		public void deleteEmployee(String username) {
-	    	
-	    	try {
-	    		System.out.println("Hi m here "+ username);
+		public void deleteEmployee(String username,Model model) {
 	    		 employeeStore.deleteByUsername(username);
-	    	 }
-	    	 catch(Exception e) {
-	    		 System.out.println(e);
-	    	 }
+	    		 showEmployeeRegister(model);
+	    		
 			
 		}
 	
