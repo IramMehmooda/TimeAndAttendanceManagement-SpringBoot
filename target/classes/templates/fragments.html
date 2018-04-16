@@ -43,7 +43,9 @@
                     <li th:classappend="${page == 'maintainemployees' ? 'active' : ''}">
                         <a href="#" th:href="@{/maintainemployees}">Maintain Employees</a>
                     </li>
-                    
+                    <li th:classappend="${page == 'maintainsupervisor' ? 'active' : ''}">
+                        <a href="#" th:href="@{/maintainsupervisor}">Maintain Supervisors</a>
+                    </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li th:unless="${user == null}">
