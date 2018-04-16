@@ -9,6 +9,7 @@ select * from user;
 select * from project;
 select * from project_employee;
 select * from timesheet;
+select * from employee;
 select * from dailyentry;
 select * from user where user_type="supervisor";
 select * from user where user_type="admin";
