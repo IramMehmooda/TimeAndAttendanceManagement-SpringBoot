@@ -4,8 +4,8 @@ drop table employee;
 drop table user;
 drop table dailyentry;
 drop table project;
-
 select * from user;
+
 select * from project;
 select * from project_employee;
 select * from timesheet;
