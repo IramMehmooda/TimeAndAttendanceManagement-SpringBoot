@@ -28,10 +28,29 @@
             <td th:text="${project.title}">sdfs</td>
             <td th:text="${project.budget}">1ssdfd</td>
             <td th:text="${project.customer}">1sfsdffdd</td>
-            <td>
-          <form action="#" th:action="@{'/manageproject?project_id={project_id}'(project_id=${project.project_id})}" th:method="delete" >
+            
+        <td>
+        <table class="table table-bordered table-striped">
+        	 <thead>
+          		<tr>
+           		 <td>Employee ID</td>
+           	 	<td> Employee Name</td>
+         	 	</tr>
+       			 </thead>
+                <tbody>
+                  <tr th:each="emp : ${project.emplist}">
+                    <td th:text="${emp.user_id}">1001</td>
+                    <td th:text="${emp.username}">Krishna sai</td>
+                     <td>
+          <form action="#" th:action="@{'/manageproject?emp={emp}'(emp=${emp.username})}" th:method="delete" >
 			  <button type="submit">Delete</button>
 		  </form>
+        </td> 
+           
+
+                  </tr>
+                </tbody>
+              </table>
         </td>
         <!--  <td>
           <form action="#" th:action="@{/maintainemployees/edit/}+${emp.username}">

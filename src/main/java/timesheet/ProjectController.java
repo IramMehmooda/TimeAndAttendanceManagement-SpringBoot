@@ -59,8 +59,7 @@ public class ProjectController {
 	        	
 	        	User user = (User) model.asMap().get("User");
 	        	
-	        	System.out.println(model.asMap().get("User") + "yes i got this user");
-	        	System.out.println(user.getUsername());
+	        	
 	        	Supervisor supervisor = supervisorStore.findByUsername(user.getUsername());
 	        	
 	        	List<Project> supprojects = projectStore.findBySupervisor(supervisor);
@@ -88,12 +87,40 @@ public class ProjectController {
 	    
 	    
 	    @RequestMapping(value="/manageproject", method=RequestMethod.DELETE)
-		public void deleteproject(int project_id,Model model) {
+		public void deleteproject(String emp,Model model) {
 	    		 //employeeStore.deleteByUsername(username);
+	    	User user = (User) model.asMap().get("User");
+        	
+        	
+        	Supervisor supervisor = supervisorStore.findByUsername(user.getUsername());
+        	
+        	List<Project> supprojects = projectStore.findBySupervisor(supervisor);
+        	
+        	for(Project project : supprojects) {
+        		
+        		for(Employee employee :project.getEmplist()) {
+        			System.out.println("this is employee in this project" + employee);
+        			System.out.println("remove this employee"+employee.getUsername()+" with "+ emp);
+        			if(employee.getUsername().equalsIgnoreCase(emp)) {
+        				
+        				project.getEmplist().remove(employee);
+        			}
+        		}
+        		
+        	}
+	    	
+	    		
+	    		//System.out.println(pid + "Hi i am here");
+	    		
+	    		//projectStore.findBySupervisor(supervisor)
+	    	
 	    	     showManageProject(model);
 	    		
 			
 		}
+	   
+	    
+	    
 	    
 	  /*  
 	    @DeleteMapping("/deleteEmployee")
