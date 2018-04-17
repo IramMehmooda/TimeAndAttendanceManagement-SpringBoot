@@ -2,6 +2,7 @@ package timesheet;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,10 +31,12 @@ import timesheet.models.Employee;
 import timesheet.models.EmployeeStore;
 import timesheet.models.Project;
 import timesheet.models.ProjectStore;
+import timesheet.models.Supervisor;
 import timesheet.models.Timesheet;
 import timesheet.models.TimesheetStore;
 import timesheet.models.User;
 import timesheet.models.UserStore;
+import timesheet.service.ProjectCreateRequest;
 
 @Controller
 @SessionAttributes({"User","Project","Timesheet"})
@@ -57,24 +60,45 @@ public class TimesheetController {
     @Autowired
     DailyEntryStore dailyEntryStore;
 	
-	@GetMapping(value="/listTimesheets")
+	/*@GetMapping(value="/listTimesheets")
     public String listTimeSheets( Model model) {
         model.addAttribute("timesheets", Utils.toList(timesheetStore.findAll()));
         return "listTimesheets";
     }
-	
+	*/
 	
 	
     @GetMapping(value="/createTimesheet")
     public String addTimeSheetForm(Model model) {
-       	model.addAttribute("timesheet", new Timesheet());
+    	 if (model.asMap().containsKey("User")) {
+    		 model.addAttribute("timesheet", new Timesheet());
        	//should be retrieved from session
-        return "createTimesheet";
+    		 return "createTimesheet";
+    	 }
+    	 else {
+    	      	
+             model.addAttribute("message", "Please login first");
+             return "home";
+         }
+    }
+    @PostMapping("/createtimesheet")
+    public String createTimesheet(@ModelAttribute("timesheet") Timesheet timesheet,@ModelAttribute("user") String username,@ModelAttribute("entrylist") String dailyentries,Model model , BindingResult result) {
+    	if(!result.hasErrors()) {
+    		User user=userStore.findByUsername(username);
+    		System.out.println(user +"in the createtimesheet page");
+    		Date date=timesheet.getStartdate();
+    		
+    		System.out.println(date);
+    		System.out.println(projectStore.displayAll());
+    		
+    		timesheetStore.save(new Timesheet(user,date));
+    		//save project
+    	}
+    	return "redirect:/";
     }
     
-    
     /////////////////////////////////////////////////////////////////////////  made to add entries in timesheet
-    @GetMapping(value="/createentries")
+   /* @GetMapping(value="/createentries")
     public void addEntries(Model model) {
     	model.addAttribute("dailyEntry", new DailyEntry());
     	
@@ -84,7 +108,7 @@ public class TimesheetController {
     @PostMapping(value="/createTimesheet")
     public String addTimesheetSubmit(@ModelAttribute Timesheet timeSheet,  @RequestParam(name="userid") Long userid) {
     	
-    	/*Employee emp = empService.getEmployee(employeeId);
+    	Employee emp = empService.getEmployee(employeeId);
 		Project proj = emp.getProjects().get(0);
 		Calendar cal = Calendar.getInstance();
 		List<DailyEntry> entries = new ArrayList<DailyEntry>(5);
@@ -99,7 +123,7 @@ public class TimesheetController {
 		
 		TimeSheet ts = new TimeSheet(emp, cal.getTime(), cal2.getTime());
 		ts.setEntries(entries);
-    	timesheetStore.save(timeSheet);*/
+    	timesheetStore.save(timeSheet);
     	
         return "redirect:/listTimesheets";
     }
@@ -140,6 +164,6 @@ public class TimesheetController {
 	        return "createTimesheet";
 	    }
 	
-	
+	*/
   
 }

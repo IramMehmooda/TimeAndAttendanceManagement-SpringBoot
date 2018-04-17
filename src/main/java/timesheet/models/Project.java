@@ -22,7 +22,7 @@ public class Project {
 	String customer;
 	
 	
-	@ManyToOne( fetch = FetchType.LAZY)
+	@ManyToOne( fetch = FetchType.EAGER)
 	@JoinColumn(name="user_id")
 	private Supervisor supervisor;
 	

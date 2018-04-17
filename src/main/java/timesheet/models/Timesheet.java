@@ -35,8 +35,8 @@ public class Timesheet {
 	@Temporal(TemporalType.DATE)
 	private Date startdate;
 	
-	@Temporal(TemporalType.DATE)
-	private Date endDate;
+	/*@Temporal(TemporalType.DATE)
+	private Date endDate;*/
 	
 	
 
@@ -87,16 +87,7 @@ public class Timesheet {
 
 
 
-	public Date getEndDate() {
-		return endDate;
-	}
-
-
-
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
-
+	
 
 
 	public List<DailyEntry> getEntries() {
@@ -111,20 +102,23 @@ public class Timesheet {
 
 
 
-	public Timesheet(User user, Date startdate, Date endDate, List<DailyEntry> entries) {
+	public Timesheet(User user, Date startdate, List<DailyEntry> entries) {
 		super();
 		this.user = user;
 		this.startdate = startdate;
-		this.endDate = endDate;
+		
 		this.entries = entries;
 	}
 
-
+	public Timesheet(User user, Date startdate) {
+		super();
+		this.user = user;
+		this.startdate = startdate;
+	}
 
 	@Override
 	public String toString() {
-		return "Timesheet [timesheet_id=" + timesheet_id + ", user=" + user + ", startdate=" + startdate + ", endDate="
-				+ endDate + ", entries=" + entries + "]";
+		return "Timesheet [timesheet_id=" + timesheet_id + ", user=" + user + ", startdate=" + startdate + ", entries=" + entries + "]";
 	}
 	
 	

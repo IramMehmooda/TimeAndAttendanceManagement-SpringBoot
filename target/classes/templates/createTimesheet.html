@@ -8,22 +8,28 @@
     <h3>Your Timesheet</h3>
 <!--     <form action="#" th:object="${supervisorname}"   th:object="${supervisors}" method="POST" class="form-horizontal" > -->
  
- <form  method="POST" class="form-horizontal" action="#" th:object="${timesheet}" ></form>
+ <!-- <form  method="POST" class="form-horizontal" action="#" th:object="${timesheet}" ></form> -->
  
- <form action="#" th:action="@{'/submitDate}" th:method="viewDEPerDate" >
+ <form action="#" th:action="@{/createtimesheet}" method="post" >
 <div>
-		Username: 
-		<p class="navbar-text" th:value="${username}" th:text="${username} "></p>
+		Username: <p th:text="${User.username}"/>
                     </div>
 		
 		<div class="form-group">
             <label class="control-label col-sm-2" for="budget">Date: </label>
             <div class="col-sm-10">
-                <input id="budget" type="datetime" name="date" autocomplete="new-password"/>
+                <input id="date" type="date" name="date" autocomplete="new-password"/>
             </div>
         </div>
-        
-			  <button type="submit">Submit Date</button>
+        <div>
+			  <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit">
+                    Submit Date
+                </button>
+            </div>
+        </div>
+			  </div>
 		  </form>
 		
 		
@@ -31,139 +37,7 @@
 		<!-- <p> Add Employee : <a href="/register"> here</a> </p> -->
 
 	
-      <table th:unless="${date == null}" class="table table-bordered table-striped">
-        <thead>
-          <tr>
-            <td>Timesheet ID</td>
-            <td>Project </td>
-            <td>From Time</td>
-            <td> To Time</td>
-            <td> <a href="/createTimesheet/addEntry"> Add Entry in Timesheet</a> </td>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- <tr th:if="${tasks.empty}">
-            <td colspan="4">No tasks</td>
-          </tr> -->
-          <tr th:each="entry : ${dailyentry}">
-            <td th:text="${entry.id}">1</td>
-            <td th:text="${entry.project.getTitle()}">sdfs</td>
-            <td th:text="${entry.fromtime}">1ssdfd</td>
-            <td th:text="${entry.totime}">1sfsdffdd</td>
-            <td>
-          <form action="#" th:action="@{'/maintainentries?id={id}'(id=${entry.id})}" th:method="delete" >
-			  <button type="submit">Delete</button>
-		  </form>
-        </td>
-       <!--  <td>
-          <form action="#" th:action="@{'/createTimesheet'}" th:method="get" >
-          	  <input type="hidden" name="employeeId" th:value="${e.id}"/>
-			  <button type="submit">Create Timesheet</button>
-		  </form>
-        </td> -->
-            
-<!--             <td><a href="view.html" th:href="@{'/' + ${task.id}}" th:text="${task.title}">Title ...</a></td> -->
-            
-          </tr>
-        </tbody>
-      </table>
-
-        ///////////createentries
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="budget">From Time: </label>
-            <div class="col-sm-10">
-                <input id="budget" type="datetime" name="fromtime" autocomplete="new-password"/>
-            </div>
-        </div>
-        
-         <div class="form-group">
-            <label class="control-label col-sm-2" for="budget">To Time: </label>
-            <div class="col-sm-10">
-                <input id="budget" type="datetime" name="totime" autocomplete="new-password"/>
-            </div>
-        </div>
-        
-        
-        
-		
-		<!-- Select a project:
-        <select class="form-control" th:field="*{projects}">
-    <option value="0" th:text="select Supervisor" ></option>
-    <option th:each="supervisor : ${supervisors}" th:value="${supervisor.username}" th:text="${supervisor.username}">
-    </option>
-    </select>
-    </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="budget">Budget: </label>
-            <div class="col-sm-10">
-                <input id="budget" type="number" name="budget" autocomplete="new-password"/>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="customer">Client:  </label>
-            <div class="col-sm-10">
-                <input id="customer" type="text" name="customer" autocomplete="new-password"/>
-            </div>
-            </div>
-       
-            <div class="form-group">
-            <label class="control-label col-sm-2" for="supervisors">Supervisors:</label>
-            Supervisor: 
-            
-    
-    
-            </div>
-            <div class="form-group">
-            <label th:text="#{project.emplist}">Employees</label>
-            
-            
-            
-            <table>
-              <thead>
-                <tr>
-                  <th th:text="#{project.emplist.head.rownum}">No.</th>
-                  <th th:text="#{project.emplist.head.fullname}">Employee Name</th>
-                  <th th:text="#{project.emplist.head.user_id}">User ID</th>
-                  <th>
-                    <button type="submit" name="addRow" th:text="#{project.emplist.add}">Add Employee</button>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr th:each="employee,rowStat : *{emplist}">
-                   <td th:text="${rowStat.count}">1</td> 
-                  
-                  <td>
-                    <select th:field="*{emplist[__${rowStat.index}__].fullname}">
-                      <option th:each="var : ${allemployees}" th:value="${var.user_id}" th:text="${var.username}">Thymus Thymi</option>
-                    </select>
-                  </td>
-                  <td th:text="${emplist.user_id}"> </td>
-                  
-                <td>   <input type="text" th:field="*{emplist[__${rowStat.index}__].job_title}" th:errorclass="fieldError" />
-                  </td>
-                  <td>
-                    <button type="submit"  name="removeRow" th:value="${rowStat.index}" th:text="#{project.emplist.remove}">Remove row</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-              </div>
-           
-                <input id="type" type="text" name="type" th:required="required"
-                       autocomplete="new-password"/> 
-            
-             -->
-            
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit">
-                    Add Timesheet
-                </button>
-            </div>
-        </div>
-
-        <p th:text="${message}"/>
+     
     
 </div>
 

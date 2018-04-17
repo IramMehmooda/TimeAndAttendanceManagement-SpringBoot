@@ -14,7 +14,7 @@ public class Supervisor extends User{
 
 	String fullname;
 	
-	@OneToMany(mappedBy = "supervisor" , cascade= CascadeType.ALL,fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "supervisor" , cascade= CascadeType.ALL,fetch = FetchType.EAGER)
 	private Set<Project> projects;
 	
 	

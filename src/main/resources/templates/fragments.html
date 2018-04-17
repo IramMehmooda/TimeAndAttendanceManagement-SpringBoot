@@ -22,6 +22,7 @@
             </div>
             <div class="navbar-collapse nav-collapse">
                 <ul class="nav navbar-nav">
+                    
                     <li th:classappend="${page == 'home' ? 'active' : ''}">
                         <a href="#" th:href="@{/}">Home</a>
                     </li>
@@ -40,12 +41,19 @@
                     <li th:classappend="${page == 'createTimesheet' ? 'active' : ''}">
                         <a href="#" th:href="@{/createTimesheet}">Add Timesheet</a>
                     </li>
-                    <li th:classappend="${page == 'maintainemployees' ? 'active' : ''}">
+                    
+                    <li th:classappend="${page == 'maintainemployees' ? 'active' : ''}" th:unless="${user == null}" th:if="${user.getDiscriminatorValue() =='admin'}">
                         <a href="#" th:href="@{/maintainemployees}">Maintain Employees</a>
                     </li>
-                    <li th:classappend="${page == 'maintainsupervisor' ? 'active' : ''}">
-                        <a href="#" th:href="@{/maintainsupervisor}">Maintain Supervisors</a>
+                    
+                    
+                    <li th:classappend="${page == 'maintainsupervisor' ? 'active' : ''}" th:unless="${user == null}" >
+                        <a href="#" th:href="@{/maintainsupervisor}" th:text="${user.getDiscriminatorValue()}">Maintain Supervisors</a>
                     </li>
+                    <li th:classappend="${page == 'manageproject' ? 'active' : ''}" >
+                        <a href="#" th:href="@{/manageproject}">Manage Project</a>
+                    </li>
+                    
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li th:unless="${user == null}">

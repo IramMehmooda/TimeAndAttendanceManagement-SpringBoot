@@ -9,9 +9,9 @@ select * from user;
 select * from project;
 select * from project_employee;
 select * from timesheet;
-select * from employee;
 select * from dailyentry;
 select * from user where user_type="supervisor";
+select * from user where user_type="employee";
 select * from user where user_type="admin";
 
 
@@ -57,4 +57,37 @@ insert into timesheet(end_date,startdate,user_user_id) values(DATE '2018-04-16',
 insert into dailyentry(id,date,fromtime,totime,noofhours,project_project_id,timesheet_id,user_user_id) values (8001,)
 
 
+
+
+
+insert into project values (5005,400002,"wiki","Testing1", 1029);
+insert into project values (5001,562520,"google","Spring project", 1026);
+insert into project values (5002,852369,"amazon","Java project", 1027);
+insert into project values (5003,895214,"netflix",".Net Project", 1027);
+insert into project values (5004,852147,"iit","Express Project", 1028);
+
+insert into project values (5009,852147,"HSBC","Project11", 1031);
+insert into project values (5006,521486,"Deloitte","Project12", 1031);
+insert into project values (5007,258741,"TCS","Project13", 1031);
+insert into project values (5008,965123,"HP","Project14", 1031);
+
+
+insert into project_employee values(5009, 1003);
+insert into project_employee values(5000, 1008);
+insert into project_employee values(5000, 1007);
+insert into project_employee values(5000, 1009);
+insert into project_employee values(5000, 1003);
+insert into project_employee values(5000, 1006);
+insert into project_employee values(5000, 1007);
+insert into project_employee values(5000, 1008);
+insert into project_employee values(5000, 1009);
+insert into project_employee values(5000, 1012);
+insert into project_employee values(5001, 1003);
+insert into project_employee values(5001, 1008);
+insert into project_employee values(5001, 1009);
+
+
+
+
+select u.user_id, p.project_id from user u, project p where user_type = "supervisor";
 
