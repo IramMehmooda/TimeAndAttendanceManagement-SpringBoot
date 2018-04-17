@@ -21,8 +21,8 @@ public class Employee extends User{
     int salary;
     long SSN;
     
-    @ManyToMany(mappedBy = "emplist")
-    private List<Project> project;
+   /* @ManyToMany(mappedBy = "emplist")
+    private List<Project> project;*/
     
     
 
@@ -62,7 +62,7 @@ public class Employee extends User{
 	@Override
 	public String toString() {
 		return "Employee [fullname=" + fullname + ", address=" + address + ", email=" + email + ", phone_no=" + phone_no
-				+ ", job_title=" + job_title + ", salary=" + salary + ", SSN=" + SSN + ", project=" + project
+				+ ", job_title=" + job_title + ", salary=" + salary + ", SSN=" + SSN + ", project="
 				+ ", toString()=" + super.toString() + "]";
 	}
 
@@ -122,7 +122,7 @@ public class Employee extends User{
 		SSN = sSN;
 	}
 
-	public List<Project> getProject() {
+	/*public List<Project> getProject() {
 		return project;
 	}
 
@@ -130,7 +130,7 @@ public class Employee extends User{
 		this.project = project;
 	}
 	
-    
+    */
     
     
 	

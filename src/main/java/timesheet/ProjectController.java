@@ -54,16 +54,17 @@ public class ProjectController {
 	    TimesheetStore timesheetStore;
 	
 	    @GetMapping("/manageproject")
-	    public String showEmployeeRegister(Model model) {
+	    public String showManageProject(Model model) {
 	        if (model.asMap().containsKey("User")) {
 	        	
-	        	//User user = (User) model.asMap().get("User");
+	        	User user = (User) model.asMap().get("User");
 	        	
 	        	System.out.println(model.asMap().get("User") + "yes i got this user");
-	        	//Supervisor supervisor = supervisorStore.findByUsername(user.getUsername());
+	        	System.out.println(user.getUsername());
+	        	Supervisor supervisor = supervisorStore.findByUsername(user.getUsername());
 	        	
-	        	//List<Project> supprojects = projectStore.findBySupervisor(supervisor);
-	        	List<Project> supprojects = new ArrayList<Project>();
+	        	List<Project> supprojects = projectStore.findBySupervisor(supervisor);
+	        	//List<Project> supprojects = new ArrayList<Project>();
 	        	 
 	        	model.addAttribute("supprojects",supprojects);
 	        	/*List<Employee> emplist = new ArrayList<Employee>();
@@ -85,6 +86,15 @@ public class ProjectController {
 	        }
 	    }
 	    
+	    
+	    @RequestMapping(value="/manageproject", method=RequestMethod.DELETE)
+		public void deleteproject(int project_id,Model model) {
+	    		 //employeeStore.deleteByUsername(username);
+	    	     showManageProject(model);
+	    		
+			
+		}
+	    
 	  /*  
 	    @DeleteMapping("/deleteEmployee")
 	    public void deleteEmployee(Model model, @RequestParam(value = "id") int userid) {
@@ -99,13 +109,13 @@ public class ProjectController {
 	    }*/
 	    
 	    
-	    @RequestMapping(value="/manageproject", method=RequestMethod.DELETE)
+	/*    @RequestMapping(value="/manageproject", method=RequestMethod.DELETE)
 		public void deleteEmployee(String username,Model model) {
 	    		 employeeStore.deleteByUsername(username);
-	    		 showEmployeeRegister(model);
+	    		 showManageProject(model);
 	    		
 			
-		}
+		}*/
 	    
 	    /*@RequestMapping(value="/maintianemployees/edit/{username}")
 	    public String edit(@PathVariable String username, Model model) {

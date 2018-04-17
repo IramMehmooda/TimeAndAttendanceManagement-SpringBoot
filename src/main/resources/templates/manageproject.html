@@ -23,21 +23,21 @@
         </thead>
         <tbody>
  
-          <tr th:each="project : ${supprojects}">
+           <tr th:each="project : ${supprojects}">
             <td th:text="${project.project_id}">1</td>
             <td th:text="${project.title}">sdfs</td>
             <td th:text="${project.budget}">1ssdfd</td>
             <td th:text="${project.customer}">1sfsdffdd</td>
-            <!-- <td>
-          <form action="#" th:action="@{'/maintainemployees?username={username}'(username=${emp.username})}" th:method="delete" >
+            <td>
+          <form action="#" th:action="@{'/manageproject?project_id={project_id}'(project_id=${project.project_id})}" th:method="delete" >
 			  <button type="submit">Delete</button>
 		  </form>
         </td>
-        <td>
+        <!--  <td>
           <form action="#" th:action="@{/maintainemployees/edit/}+${emp.username}">
 			  <button type="submit">Edit</button>
 		  </form>
-        </td> -->
+        </td>  -->
        <!--  <td>
           <form action="#" th:action="@{'/createTimesheet'}" th:method="get" >
           	  <input type="hidden" name="employeeId" th:value="${e.id}"/>

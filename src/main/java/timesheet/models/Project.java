@@ -129,7 +129,7 @@ public class Project {
 	@Override
 	public String toString() {
 		return "Project [project_id=" + project_id + ", title=" + title + ", budget=" + budget + ", customer="
-				+ customer + ", supervisor=" + supervisor + ", emplist="  + "]";
+				+ customer + ", supervisor="  + ", emplist="  + "]";
 	}
 	
 	

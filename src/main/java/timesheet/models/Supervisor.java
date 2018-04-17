@@ -15,7 +15,7 @@ public class Supervisor extends User{
 
 	String fullname;
 	
-	@OneToMany(mappedBy = "supervisor" )
+	@OneToMany(mappedBy = "supervisor" ,fetch = FetchType.EAGER )
 	private List<Project> projects;
 	
 	
@@ -63,7 +63,7 @@ public class Supervisor extends User{
 
 	@Override
 	public String toString() {
-		return "Supervisor [fullname=" + fullname + ", projects=" + projects + ", toString()=" + super.toString() + "]";
+		return "Supervisor [fullname=" + fullname + ", projects=" + ", toString()="  + "]";
 	}
 	
 	
