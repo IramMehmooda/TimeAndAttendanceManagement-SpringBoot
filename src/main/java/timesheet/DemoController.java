@@ -316,14 +316,19 @@ public class DemoController {
 //    @RequestParam(value="supervisorname", defaultValue="0")String supervisorname
     public String showProjectRegister(Model model) {
         if (model.asMap().containsKey("User")) {
-        	List<Employee> employees =  (List<Employee>) employeeStore.findAll();
+        	
+        	
+        	/*List<Employee> employees =  (List<Employee>) employeeStore.findAll();
         	System.out.println(employees);
         	model.addAttribute("employees",employees);
         	List<Employee> emplist = new ArrayList<Employee>();
-        	model.addAttribute(emplist);
-        	Project project = new Project();
+        	model.addAttribute(emplist);*/
+        	System.out.println("Yes i got the output cool");
         	
+        	
+        	Project project = new Project();
         	model.addAttribute(project);
+        	
         	Supervisor supervisor = new Supervisor();
         	model.addAttribute(supervisor);
         	List<Supervisor> supervisors = (List<Supervisor>) supervisorStore.findAll();

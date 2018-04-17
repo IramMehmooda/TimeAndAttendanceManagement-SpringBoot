@@ -35,8 +35,8 @@ public class Timesheet {
 	@Temporal(TemporalType.DATE)
 	private Date startdate;
 	
-	/*@Temporal(TemporalType.DATE)
-	private Date endDate;*/
+	@Temporal(TemporalType.DATE)
+	private Date endDate;
 	
 	
 

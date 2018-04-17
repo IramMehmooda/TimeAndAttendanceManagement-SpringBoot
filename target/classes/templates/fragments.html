@@ -42,14 +42,18 @@
                         <a href="#" th:href="@{/createTimesheet}">Add Timesheet</a>
                     </li>
                     
-                    <li th:classappend="${page == 'maintainemployees' ? 'active' : ''}" th:unless="${user == null}" th:if="${user.getDiscriminatorValue() =='admin'}">
+                    <li th:classappend="${page == 'maintainemployees' ? 'active' : ''}" th:if="${User != null and User.getDiscriminatorValue() == 'admin'}" >
                         <a href="#" th:href="@{/maintainemployees}">Maintain Employees</a>
                     </li>
                     
                     
-                    <li th:classappend="${page == 'maintainsupervisor' ? 'active' : ''}" th:unless="${user == null}" >
-                        <a href="#" th:href="@{/maintainsupervisor}" th:text="${user.getDiscriminatorValue()}">Maintain Supervisors</a>
+                    <li th:classappend="${page == 'maintainsupervisor' ? 'active' : ''}" th:if="${User != null and User.getDiscriminatorValue() == 'admin'}" >
+                        <a href="#" th:href="@{/maintainsupervisor}" >Maintain Supervisors</a>
                     </li>
+                     <li th:classappend="${page == 'maintainprojects' ? 'active' : ''}" th:if="${User != null and User.getDiscriminatorValue() == 'admin'}" >
+                        <a href="#" th:href="@{/maintainprojects}" >Maintain Supervisors</a>
+                    </li>
+                    
                     <li th:classappend="${page == 'manageproject' ? 'active' : ''}" >
                         <a href="#" th:href="@{/manageproject}">Manage Project</a>
                     </li>

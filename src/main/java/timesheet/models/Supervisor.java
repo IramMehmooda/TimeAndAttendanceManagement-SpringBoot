@@ -1,5 +1,6 @@
 package timesheet.models;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -14,8 +15,8 @@ public class Supervisor extends User{
 
 	String fullname;
 	
-	@OneToMany(mappedBy = "supervisor" , cascade= CascadeType.ALL,fetch = FetchType.EAGER)
-	private Set<Project> projects;
+	@OneToMany(mappedBy = "supervisor" )
+	private List<Project> projects;
 	
 	
 
@@ -33,11 +34,11 @@ public class Supervisor extends User{
 		this.fullname = fullname;
 	}
 
-	public Set<Project> getProjects() {
+	public List<Project> getProjects() {
 		return projects;
 	}
 
-	public void setProjects(Set<Project> projects) {
+	public void setProjects(List<Project> projects) {
 		this.projects = projects;
 	}
 

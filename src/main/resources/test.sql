@@ -22,7 +22,7 @@ insert into user(username,password,user_type,fullname) values( "Bhamati","passwo
 
 
 
-insert into user(username,password,user_type,fullname,address,email,phone_no,job_title,salary,ssn) values(1003,"Inzemam","password","employee","Iram Mehmooda","DeKalb,IL,USA","iram.niu@gmail.com",6789087689,"Team Lead-CRM",200000,87887866);
+insert into user(user_id,username,password,user_type,fullname,address,email,phone_no,job_title,salary,ssn) values(1001,"Inzemam","password","employee","Iram Mehmooda","DeKalb,IL,USA","iram.niu@gmail.com",6789087689,"Team Lead-CRM",200000,87887866);
 insert into user(username,password,user_type,fullname,address,email,phone_no,job_title,salary,ssn) values("Jason","password","employee","Jason Kors","DeKalb,IL,USA","Jason@gmail.com",6789087689,"Team Lead-CRM",200000,87887866);
 insert into user(username,password,user_type,fullname,address,email,phone_no,job_title,salary,ssn) values("Jade","password","employee","Jade Smith","DeKalb,IL,USA","Jade.niu@gmail.com",6789087689,"Team Lead-CRM",200000,87887866);
 insert into user(username,password,user_type,fullname,address,email,phone_no,job_title,salary,ssn) values("Vicky","password","employee","Vicky Malwa","DeKalb,IL,USA","Vicky.niu@gmail.com",6789087689,"Team Lead-CRM",200000,87887866);
@@ -60,17 +60,17 @@ insert into dailyentry(id,date,fromtime,totime,noofhours,project_project_id,time
 
 
 
-insert into project values (5005,400002,"wiki","Testing1", 1029);
-insert into project values (5001,562520,"google","Spring project", 1026);
-insert into project values (5002,852369,"amazon","Java project", 1027);
-insert into project values (5003,895214,"netflix",".Net Project", 1027);
-insert into project values (5004,852147,"iit","Express Project", 1028);
+insert into project values (5000,562500,"microsoft","Project14", 1014);
+insert into project values (5005,400002,"wiki","Testing1", 1014);
+insert into project values (5001,562520,"google","Spring project", 1015);
+insert into project values (5002,852369,"amazon","Java project", 1016);
+insert into project values (5003,895214,"netflix",".Net Project", 1016);
+insert into project values (5004,852147,"iit","Express Project", 1014);
 
-insert into project values (5009,852147,"HSBC","Project11", 1031);
-insert into project values (5006,521486,"Deloitte","Project12", 1031);
-insert into project values (5007,258741,"TCS","Project13", 1031);
-insert into project values (5008,965123,"HP","Project14", 1031);
-
+insert into project values (5009,852147,"HSBC","Project11", 1014);
+insert into project values (5006,521486,"Deloitte","Project12", 1019);
+insert into project values (5007,258741,"TCS","Project13", 1020);
+insert into project values (5008,965123,"HP","Project14", 1017);
 
 insert into project_employee values(5009, 1003);
 insert into project_employee values(5000, 1008);
@@ -81,7 +81,7 @@ insert into project_employee values(5000, 1006);
 insert into project_employee values(5000, 1007);
 insert into project_employee values(5000, 1008);
 insert into project_employee values(5000, 1009);
-insert into project_employee values(5000, 1012);
+insert into project_employee values(5000, 1010);
 insert into project_employee values(5001, 1003);
 insert into project_employee values(5001, 1008);
 insert into project_employee values(5001, 1009);

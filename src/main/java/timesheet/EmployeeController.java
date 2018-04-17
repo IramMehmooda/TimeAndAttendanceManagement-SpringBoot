@@ -27,7 +27,7 @@ import timesheet.models.TimesheetStore;
 import timesheet.models.UserStore;
 
 @Controller
-@SessionAttributes({"User","Supervisor"})
+@SessionAttributes({"User"})
 @ComponentScan("timesheet.models")
 public class EmployeeController {
 	
@@ -56,17 +56,12 @@ public class EmployeeController {
 	    public String showEmployeeRegister(Model model) {
 	        if (model.asMap().containsKey("User")) {
 	        	List<Employee> employees =  (List<Employee>) employeeStore.findAll();
-	        	System.out.println(employees);
+	        	//System.out.println(employees);
+	        	//List<Employee> employees = new ArrayList<Employee>();
 	        	model.addAttribute("employees",employees);
-	        	List<Employee> emplist = new ArrayList<Employee>();
-	        	model.addAttribute(emplist);
-	        	Project project = new Project();
 	        	
-	        	model.addAttribute(project);
-	        	Supervisor supervisor = new Supervisor();
-	        	model.addAttribute(supervisor);
-	        	List<Supervisor> supervisors = (List<Supervisor>) supervisorStore.findAll();
-	        	model.addAttribute("supervisors",supervisors);
+	        	
+	        	
 	        	//model.addAttribute("supervisor", supervisor);
 	        	
 	            return "maintainemployees";

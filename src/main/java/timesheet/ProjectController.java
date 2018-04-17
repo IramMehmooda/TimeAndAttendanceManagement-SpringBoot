@@ -28,7 +28,7 @@ import timesheet.models.UserStore;
 import timesheet.service.ProjectCreateRequest;
 
 @Controller
-@SessionAttributes({"User","Supervisor","Employee","Project"})
+@SessionAttributes({"User"})
 @ComponentScan("timesheet.models")
 public class ProjectController {
 	

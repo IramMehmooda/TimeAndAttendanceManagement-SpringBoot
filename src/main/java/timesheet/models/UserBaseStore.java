@@ -2,6 +2,8 @@ package timesheet.models;
 
 
 
+import java.util.List;
+
 import org.hibernate.sql.Update;
 import org.springframework.data.jpa.repository.Query;
 
@@ -13,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface UserBaseStore<T extends User> extends CrudRepository<T, Long>{
 	
-	Iterable<T> findAll();
+	List<T> findAll();
 	public T findByUsername(String username);
 	
 	@Query("delete from User where user_id = ?1")

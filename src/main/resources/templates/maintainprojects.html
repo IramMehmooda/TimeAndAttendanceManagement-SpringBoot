@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<div th:replace="fragments :: top"></div>
+
+<div class="container">
+    <h3> Maintain Employees</h3>
+
+<p> Add Employee : <a href="/register"> here</a> </p>
+
+	
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <td>Employee ID</td>
+            <td>Name</td>
+            <td>email</td>
+            <td> job_title</td>
+            <td> <a href="/register"> Add Employee</a> </td>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- <tr th:if="${tasks.empty}">
+            <td colspan="4">No tasks</td>
+          </tr> -->
+          <tr th:each="emp : ${employees}">
+            <td th:text="${emp.user_id}">1</td>
+            <td th:text="${emp.fullname}">sdfs</td>
+            <td th:text="${emp.email}">1ssdfd</td>
+            <td th:text="${emp.job_title}">1sfsdffdd</td>
+            <td>
+          <form action="#" th:action="@{'/maintainemployees?username={username}'(username=${emp.username})}" th:method="delete" >
+			  <button type="submit">Delete</button>
+		  </form>
+        </td>
+        <!-- <td>
+          <form action="#" th:action="@{/maintainemployees/edit/}+${emp.username}">
+			  <button type="submit">Edit</button>
+		  </form>
+        </td> -->
+       <!--  <td>
+          <form action="#" th:action="@{'/createTimesheet'}" th:method="get" >
+          	  <input type="hidden" name="employeeId" th:value="${e.id}"/>
+			  <button type="submit">Create Timesheet</button>
+		  </form>
+        </td> -->
+            
+<!--             <td><a href="view.html" th:href="@{'/' + ${task.id}}" th:text="${task.title}">Title ...</a></td> -->
+            
+          </tr>
+        </tbody>
+      </table>
+		
+		
+	</div>
+
+<div th:replace="fragments :: bottom"></div>
+
+
+</body>
+</html>

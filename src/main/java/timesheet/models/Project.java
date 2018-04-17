@@ -22,13 +22,13 @@ public class Project {
 	String customer;
 	
 	
-	@ManyToOne( fetch = FetchType.EAGER)
+	@ManyToOne( fetch = FetchType.LAZY)
 	@JoinColumn(name="user_id")
 	private Supervisor supervisor;
 	
 	
 
-	@ManyToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     @JoinTable(name = "project_employee",
             joinColumns = {@JoinColumn(name = "project_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id")}
@@ -129,7 +129,7 @@ public class Project {
 	@Override
 	public String toString() {
 		return "Project [project_id=" + project_id + ", title=" + title + ", budget=" + budget + ", customer="
-				+ customer + ", supervisor=" + supervisor + ", emplist=" + emplist + "]";
+				+ customer + ", supervisor=" + supervisor + ", emplist="  + "]";
 	}
 	
 	
