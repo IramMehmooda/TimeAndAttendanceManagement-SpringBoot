@@ -89,7 +89,7 @@ public class TimesheetController {
     		Date date=timesheet.getStartdate();
     		
     		System.out.println(date);
-    		System.out.println(projectStore.displayAll());
+    		//System.out.println(projectStore.findAll());
     		
     		timesheetStore.save(new Timesheet(user,date));
     		//save project

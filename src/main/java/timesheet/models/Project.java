@@ -22,13 +22,13 @@ public class Project {
 	String customer;
 	
 	
-	@ManyToOne( fetch = FetchType.LAZY)
+	@ManyToOne( fetch = FetchType.EAGER)
 	@JoinColumn(name="user_id")
 	private Supervisor supervisor;
 	
 	
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinTable(name = "project_employee",
             joinColumns = {@JoinColumn(name = "project_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id")}

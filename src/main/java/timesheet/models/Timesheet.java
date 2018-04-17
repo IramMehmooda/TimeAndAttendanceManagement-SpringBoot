@@ -40,7 +40,7 @@ public class Timesheet {
 	
 	
 
-	@OneToMany(mappedBy = "timesheet", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "timesheet", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	List<DailyEntry> entries;
 
 

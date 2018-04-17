@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,8 +29,9 @@ import timesheet.models.UserStore;
 import timesheet.service.ProjectCreateRequest;
 
 @Controller
-@SessionAttributes({"User"})
+@SessionAttributes({"User","Supervisor"})
 @ComponentScan("timesheet.models")
+@Transactional
 public class ProjectController {
 	
 	 @Autowired
@@ -54,11 +56,15 @@ public class ProjectController {
 	    @GetMapping("/manageproject")
 	    public String showEmployeeRegister(Model model) {
 	        if (model.asMap().containsKey("User")) {
-	        	User user = (User) model.asMap().get("User");
 	        	
-	        	System.out.println(user + "yes i got this user");
-	        	Supervisor supervisor = supervisorStore.findByUsername(user.getUsername());
-	        	List<Project> supprojects = projectStore.findBySupervisor(supervisor);
+	        	//User user = (User) model.asMap().get("User");
+	        	
+	        	System.out.println(model.asMap().get("User") + "yes i got this user");
+	        	//Supervisor supervisor = supervisorStore.findByUsername(user.getUsername());
+	        	
+	        	//List<Project> supprojects = projectStore.findBySupervisor(supervisor);
+	        	List<Project> supprojects = new ArrayList<Project>();
+	        	 
 	        	model.addAttribute("supprojects",supprojects);
 	        	/*List<Employee> emplist = new ArrayList<Employee>();
 	        	model.addAttribute(emplist);

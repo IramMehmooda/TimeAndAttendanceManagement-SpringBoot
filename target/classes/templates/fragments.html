@@ -51,24 +51,24 @@
                         <a href="#" th:href="@{/maintainsupervisor}" >Maintain Supervisors</a>
                     </li>
                      <li th:classappend="${page == 'maintainprojects' ? 'active' : ''}" th:if="${User != null and User.getDiscriminatorValue() == 'admin'}" >
-                        <a href="#" th:href="@{/maintainprojects}" >Maintain Supervisors</a>
+                        <a href="#" th:href="@{/maintainprojects}" >Maintain Projects</a>
                     </li>
                     
-                    <li th:classappend="${page == 'manageproject' ? 'active' : ''}" >
+                    <li th:classappend="${page == 'manageproject' ? 'active' : ''}"  th:if="${User != null and User.getDiscriminatorValue() == 'supervisor'}">
                         <a href="#" th:href="@{/manageproject}">Manage Project</a>
                     </li>
                     
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li th:unless="${user == null}">
-                        <p class="navbar-text" th:text="${user.getFullName()} "></p>
+                    <li th:unless="${User == null}">
+                        <p class="navbar-text" th:text="${User.getUsername()} "></p>
                     </li>
-                    <li th:if="${user == null}">
+                    <li th:if="${User == null}">
                         <a href="/signin" th:href="@{/login}">
                             <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Sign in
                         </a>
                     </li>
-                    <li th:unless="${user == null}">
+                    <li th:unless="${User == null}">
                         <a href="/logout" th:href="@{#}" onclick="$('#form').submit();">
                             <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout
                         </a>

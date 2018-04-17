@@ -15,7 +15,7 @@ public class Supervisor extends User{
 
 	String fullname;
 	
-	@OneToMany(mappedBy = "supervisor" )
+	@OneToMany(mappedBy = "supervisor" , cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	private List<Project> projects;
 	
 	
@@ -47,6 +47,16 @@ public class Supervisor extends User{
 		
 		this.fullname=fullname;
 		// TODO Auto-generated constructor stub
+	}
+	
+	
+
+
+
+	public Supervisor(String username, String password,String fullname, List<Project> projects) {
+		super(username, password);
+		this.fullname = fullname;
+		this.projects = projects;
 	}
 
 

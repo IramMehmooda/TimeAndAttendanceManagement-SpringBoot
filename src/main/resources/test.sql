@@ -4,7 +4,9 @@ drop table employee;
 drop table user;
 drop table dailyentry;
 drop table project;
-select * from user;
+select * from user where username = "Bhamati";
+
+delete u from user u where user_id = 1013;
 
 select * from project;
 select * from project_employee;
@@ -15,9 +17,9 @@ select * from user where user_type="employee";
 select * from user where user_type="admin";
 
 
-insert into user(username,password,user_type,fullname) values( "Iram","password","admin","Iram Mehmooda");
-insert into user(username,password,user_type,fullname) values( "Inze","password","admin","Inzemamuddin Mohammed");
-insert into user(username,password,user_type,fullname) values( "Bhamati","password","admin","Bhamati Kuchibotla");
+insert into user(username,password,user_type,fullname) values( "AIram","password","admin","Iram Mehmooda");
+insert into user(username,password,user_type,fullname) values( "AInze","password","admin","Inzemamuddin Mohammed");
+insert into user(username,password,user_type,fullname) values( "ABhamati","password","admin","Bhamati Kuchibotla");
 
 
 

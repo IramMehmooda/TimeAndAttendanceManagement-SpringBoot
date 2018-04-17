@@ -23,11 +23,11 @@ public interface ProjectStore extends CrudRepository<Project, Long>{
 	
 	public Project findByTitle(String title);
 	
-	@Query("select p from Project p")
-	public List<Project> displayAll();
+	//@Query("select p from Project p")
+	//public List<Project> displayAll();
 	
 	
-//	@Query("select p from project p where p.user_id = ?1")
+	//@Query("select p from Project p where p.user_id = ?1")
 	public List<Project> findBySupervisor(Supervisor supervisor);
 	
 	
