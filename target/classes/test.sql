@@ -6,7 +6,7 @@ drop table dailyentry;
 drop table project;
 select * from user where username = "Bhamati";
 
-delete u from user u where user_id = 1013;
+select * from user where user_id = 1016;
 
 select * from project;
 select * from project_employee;
