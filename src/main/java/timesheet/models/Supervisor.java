@@ -15,7 +15,7 @@ public class Supervisor extends User{
 
 	String fullname;
 	
-	@OneToMany(mappedBy = "supervisor" , cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "supervisor" )
 	private List<Project> projects;
 	
 	
