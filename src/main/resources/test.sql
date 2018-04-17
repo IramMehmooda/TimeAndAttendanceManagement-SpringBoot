@@ -86,8 +86,13 @@ insert into project_employee values(5000, 1009);
 insert into project_employee values(5000, 1010);
 insert into project_employee values(5001, 1003);
 insert into project_employee values(5001, 1008);
-insert into project_employee values(5001, 1009);
+insert into project_employee values(5001, 1002);
+insert into project_employee values(5002, 1003);
+insert into project_employee values(5002, 1004);
+insert into project_employee values(5002, 1005);
 
+
+delete from project_employee where user_id=890;
 
 
 
