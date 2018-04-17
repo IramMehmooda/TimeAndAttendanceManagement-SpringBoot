@@ -122,77 +122,26 @@ public class ProjectController {
 	    
 	    
 	    
-	  /*  
-	    @DeleteMapping("/deleteEmployee")
-	    public void deleteEmployee(Model model, @RequestParam(value = "id") int userid) {
-	    	 try {
-	    		 employeeStore.deleteByUserid(userid);
-	    	 }
-	    	 catch(Exception e) {
-	    		 System.out.println(e);
-	    	 }
-	    	
-	    	
-	    }*/
 	    
-	    
-	/*    @RequestMapping(value="/manageproject", method=RequestMethod.DELETE)
-		public void deleteEmployee(String username,Model model) {
-	    		 employeeStore.deleteByUsername(username);
-	    		 showManageProject(model);
-	    		
-			
-		}*/
-	    
-	    /*@RequestMapping(value="/maintianemployees/edit/{username}")
-	    public String edit(@PathVariable String username, Model model) {
-	    	model.addAttribute("employee",employeeStore.findByUsername(username));
-	    	return "register";
-	    }*/
-	    
-	   /* @GetMapping("/projectregister")
-//	    @RequestParam(value="supervisorname", defaultValue="0")String supervisorname
+	    @GetMapping("/maintainprojects")
 	    public String showProjectRegister(Model model) {
 	        if (model.asMap().containsKey("User")) {
-	        	List<Employee> employees =  (List<Employee>) employeeStore.findAll();
-	        	System.out.println(employees);
-	        	model.addAttribute("employees",employees);
-	        	List<Employee> emplist = new ArrayList<Employee>();
-	        	model.addAttribute(emplist);
-	        	Project project = new Project();
-	        	
-	        	model.addAttribute(project);
-	        	Supervisor supervisor = new Supervisor();
-	        	model.addAttribute(supervisor);
-	        	List<Supervisor> supervisors = (List<Supervisor>) supervisorStore.findAll();
-	        	model.addAttribute("supervisors",supervisors);
-	        	//model.addAttribute("supervisor", supervisor);
-	        	
-	            return "projectregister";
+	        	List<Project> projects =  (List<Project>) projectStore.findAll();
+	        	model.addAttribute("projects",projects);
+	        	return "maintainprojects";
 	        } else {
 	        	
 	            model.addAttribute("message", "Please login first");
 	            return "home";
 	        }
 	    }
-	    
-	    @PostMapping("/projectregister")
-	    public String projectRegister(@ModelAttribute("project") ProjectCreateRequest project,@ModelAttribute("supervisor") String supervisorname,@ModelAttribute("emplist") String employees,Model model , BindingResult result) {
-	    	if(!result.hasErrors()) {
-	    		long budget = (long)project.getBudget();
-	    		String title = project.getTitle();
-	    		String customer = project.getCustomer();
-	    		System.out.println(project.getCustomer());
-	    		System.out.println(project.getSupervisorname());
-	    		System.out.println(employees +"yes got it");
-	    		Supervisor supervisor = supervisorStore.findByUsername(supervisorname);
+	    @RequestMapping(value="/maintainprojects", method=RequestMethod.DELETE)
+		public void deleteEmployee(String title,Model model) {
+	    		 projectStore.deleteByTitle(title);
+	    		 showProjectRegister(model);
 	    		
-	    		projectStore.save(new Project(title,budget,customer,supervisor,null));
-	    		//save project
-	    	}
-	    	return "redirect:/";
-	    }
-	*/
-	
+			
+		}
+	 
 
 }

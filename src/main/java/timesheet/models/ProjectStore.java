@@ -30,6 +30,8 @@ public interface ProjectStore extends CrudRepository<Project, Long>{
 	//@Query("select p from Project p where p.user_id = ?1")
 	public List<Project> findBySupervisor(Supervisor supervisor);
 	
+	public void deleteByTitle(String title);
+	
 	
 	
 
