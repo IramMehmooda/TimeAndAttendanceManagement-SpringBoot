@@ -10,14 +10,14 @@ public class ProjectCreateRequest{
 	private int budget;
 	private String customer;
 	private Supervisor supervisorname;
-	private List<Employee> employeelist;
+	private List<Employee> emplist;
 	
 	
-	public List<Employee> getEmployeelist() {
-		return employeelist;
+	public List<Employee> getEmplist() {
+		return emplist;
 	}
-	public void setEmployeelist(List<Employee> employeelist) {
-		this.employeelist = employeelist;
+	public void setEmplist(List<Employee> emplist) {
+		this.emplist = emplist;
 	}
 	public String getTitle() {
 		return title;

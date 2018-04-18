@@ -23,6 +23,10 @@ public interface ProjectStore extends CrudRepository<Project, Long>{
 	
 	public Project findByTitle(String title);
 	
+	
+	//public Project save(Project project);
+
+	
 	//@Query("select p from Project p")
 	//public List<Project> displayAll();
 	
