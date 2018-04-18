@@ -86,11 +86,13 @@ public class TimesheetController {
  	        		Employee employee=employeeStore.findByUsername(user.getUsername());
  	        		List<Project> empprojects =employee.getProject();
  	        		System.out.println("I am an employee");
+ 	        		model.addAttribute("employee",employee);
  	        		model.addAttribute("empprojects",empprojects);
  	        	}
  	        	if(user1.getDiscriminatorValue().equalsIgnoreCase("supervisor")) {
  	        		Supervisor supervisor = supervisorStore.findByUsername(user.getUsername());
  	        		List<Project> empprojects = projectStore.findBySupervisor(supervisor);
+ 	        		model.addAttribute("employee",supervisor);
  	        		model.addAttribute("empprojects",empprojects);
  	        	}
  	        	model.addAttribute("entries", new DailyEntry());
