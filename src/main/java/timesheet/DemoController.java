@@ -115,24 +115,7 @@ public class DemoController {
     }
     
 
-    
-    @RequestMapping(value="/projectregister", params={"addRow"})
-    public String addRow(final Project project, final BindingResult bindingResult) {
-        project.getEmplist().add(new Employee());
 
-        return "projectregister";
-    }
-    
-    
-    @RequestMapping(value="/projectregister", params={"removeRow"})
-    public String removeRow(final Project project, final BindingResult bindingResult, final HttpServletRequest req) {
-        final Integer rowId = Integer.valueOf(req.getParameter("removeRow"));
-        System.out.println(rowId);
-        project.getEmplist().remove(rowId.intValue());
-        //seedStarter.getRows().remove(rowId.intValue());
-        return "projectregister";
-    }
-    
     
     
     ////////////////////////////////////////////////////////////////////////////////////
@@ -245,30 +228,7 @@ public class DemoController {
     	}
         
     }
-/*  @PostMapping("/projectregister")
-    public String projectRegister(
-            @ModelAttribute("supervisorname") String supervisorname,Model model) {
-    	try {
-    		Project project = projectStore.findByTitle(title);
-            if (project != null) {
-                model.addAttribute("message", "Project Title already exists!");
-                return "projectregister";
-            } else {
-            	//String username = supervisor;
-            	Supervisor s1 = supervisorStore.findByUsername(supervisorname);
-            	System.out.println(supervisorname);
-            		projectStore.save(new Project(title,budget,customer,s1,null));
-            	model.addAttribute("message","Project "+title+" Added");
-            		
-           
-            	return "home";
-            }
-    		
-    	}catch(Exception ex) {
-    		return "user not found"+ex.getMessage();
-    	}
-    }*/
-    
+
     
     
     @PostMapping("/projectregister")
@@ -323,7 +283,7 @@ public class DemoController {
         	model.addAttribute("employees",employees);
         	List<Employee> emplist = new ArrayList<Employee>();
         	model.addAttribute(emplist);*/
-        	System.out.println("Yes i got the output cool");
+        	//System.out.println("Yes i got the output cool");
         	
         	
         	Project project = new Project();

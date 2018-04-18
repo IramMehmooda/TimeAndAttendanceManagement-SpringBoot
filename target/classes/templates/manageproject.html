@@ -15,10 +15,12 @@
       <table class="table table-bordered table-striped">
         <thead>
           <tr>
+          
             <td>Project ID</td>
             <td> Project Name</td>
             <td>Budget </td>
             <td> Client Name</td>
+            
           </tr>
         </thead>
         <tbody>
@@ -29,9 +31,50 @@
             <td th:text="${project.budget}">1ssdfd</td>
             <td th:text="${project.customer}">1sfsdffdd</td>
             <td>
-          <form action="#" th:action="@{'/manageproject?project_id={project_id}'(project_id=${project.project_id})}" th:method="delete" >
-			  <button type="submit">Delete</button>
+          <a th:href="@{'/manageempproject?title={title}' (title = ${project.title}) }">Edit project</a>
+        </td>
+            
+        <td>
+        <table class="table table-bordered table-striped">
+        	 <thead>
+          		<tr>
+          		<td> S.No. </td>
+           		 <td>Employee ID</td>
+           	 	<td> Employee Name</td>
+           	 	<!-- <td> 
+           	 	<form action="#" th:action="@{'/manageproject/{{project_id}}'(project_id=${project.project_id})}" th:method="get" >
+           	 	
+			  <button type="submit">Add Employee</button>
+			  <div class="form-group" th:unless="${#lists.isEmpty(allemployees)}">
+          Select Employees:
+            <select class="form-control" th:field="*{employee}">
+    <option value="0" th:text="select Supervisor" ></option>
+    <option th:each="employee : ${allemployees}" th:value="${employee.username}" th:text="${employee.username}">
+    </option>
+    </select></div>
+			   <p th:text="${message}"/>
 		  </form>
+    
+           	 	</td> -->
+         	 	</tr>
+       			 </thead>
+                <tbody>
+                  <tr th:each="emp,empStat : ${project.emplist}">
+                  <td th:text="${empStat.count}">1</td>
+                    <td th:text="${emp.user_id}">1001</td>
+                    <td th:text="${emp.username}">Krishna sai</td>
+                     <td>
+          <form action="#" th:action="@{'/manageproject?emp={emp}'(emp=${emp.username})}" th:method="delete" >
+			  <button type="submit">Delete</button>
+			   <p th:text="${message}"/>
+		  </form>
+        </td> 
+       
+           
+
+                  </tr>
+                </tbody>
+              </table>
         </td>
         
             
@@ -41,6 +84,23 @@
 		
 		
 	</div>
+	
+	
+	
+	
+	
+	
+	
+     
+   <!--      <select multiple="multiple" th:field="*{emplist}">
+
+        <option th:each="emp : ${employees}"
+                th:value="${emp.username}"
+                th:text="${emp.username}">Employees Name</option>
+    </select>
+   
+     -->
+           
 
 <div th:replace="fragments :: bottom"></div>
 
