@@ -7,9 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +27,7 @@ import timesheet.models.ProjectStore;
 import timesheet.models.Supervisor;
 import timesheet.models.SupervisorStore;
 import timesheet.models.TimesheetStore;
+import timesheet.models.User;
 import timesheet.models.UserStore;
 
 @Controller
@@ -93,6 +97,47 @@ public class EmployeeController {
 	    		
 			
 		}
+	    
+	    @PostMapping("/editemployee")
+	    public String processeditingEmployee(@ModelAttribute("employee")  Employee employee,Model model, BindingResult result) {
+	    	try {
+	    		
+	    		System.out.println(employee);
+	    		
+	    		//Employee employee1= employeeStore.findByUsername(userName);
+	    		System.out.println("Employee is inside post mapping");
+	    		/* if (user != null) {
+	                model.addAttribute("message", "Username already available, please try other username");
+	                return "register";
+	            } else {
+	            //new Employee(userName, password,fullName, address, email, phone_no, job_title, salary, sSN)
+	            	*/
+	            		 userStore.save(employee);
+	                     model.addAttribute("message", "Employee : " + employee + "modified");
+	                    // userStore.save(new Admin(userName, password, fullName));
+	            	
+	            	
+	            		
+	            	return "maintainemployee";
+	            
+	    		
+	    	}catch(Exception ex) {
+	    		return "user not found"+ex.getMessage();
+	    	}
+	        
+	    }
+	    
+	    @GetMapping(value="/editemployee/{username}")
+	    public String editEmployee(@PathVariable("username") String username , Model model) {
+	    	System.out.println(username);
+	    	
+	    	Employee employee=employeeStore.findByUsername(username);
+	    	model.addAttribute("employee", employee);
+	    	return "editemployee";
+	    }
+	    
+	    
+	    
 	    
 	    /*@RequestMapping(value="/maintianemployees/edit/{username}")
 	    public String edit(@PathVariable String username, Model model) {

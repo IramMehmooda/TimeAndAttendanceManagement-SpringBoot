@@ -26,55 +26,32 @@ public class DailyEntry {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
-	@Temporal(TemporalType.DATE)
-	private Date date;
-	
-	
-	@Temporal(TemporalType.TIME)
-	
-	private Date fromtime;
-	
-	
-	@Temporal(TemporalType.TIME)
-	private Date totime;
-	
-	
+	private Time fromtime;
+	private Time totime;
+	@ManyToOne
+	Project project;
+	double noofhours;
 	@ManyToOne( fetch = FetchType.LAZY)
 	@JoinColumn(name="timesheet_id")
 	Timesheet timesheet;
 	
-	@ManyToOne
-	Project project;
-	
-	
-	@ManyToOne
-	User user;
-	
-	double noofhours;
-	
-	
-	
-
-
 	public DailyEntry() {
 		super();
 	}
 
-	@Override
-	public String toString() {
-		return "DailyEntry [id=" + id + ", date=" + date + ", fromtime=" + fromtime + ", totime=" + totime
-				+ ", project=" + project + ", user=" + user + ", noofhours=" + noofhours + "]";
-	}
-
-	public DailyEntry(Date date, Time fromtime, Time totime, Project project, User user, double noofhours) {
+	public DailyEntry(Time fromtime, Time totime, Project project, double noofhours, Timesheet timesheet) {
 		super();
-		this.date = date;
 		this.fromtime = fromtime;
 		this.totime = totime;
 		this.project = project;
-		this.user = user;
 		this.noofhours = noofhours;
+		this.timesheet = timesheet;
+	}
+
+	@Override
+	public String toString() {
+		return "DailyEntry [id=" + id + ", fromtime=" + fromtime + ", totime=" + totime + ", project=" + project
+				+ ", noofhours=" + noofhours + ", timesheet=" + timesheet + "]";
 	}
 
 	public Long getId() {
@@ -85,27 +62,19 @@ public class DailyEntry {
 		this.id = id;
 	}
 
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
-	public Date getFromtime() {
+	public Time getFromtime() {
 		return fromtime;
 	}
 
-	public void setFromtime(Date fromtime) {
+	public void setFromtime(Time fromtime) {
 		this.fromtime = fromtime;
 	}
 
-	public Date getTotime() {
+	public Time getTotime() {
 		return totime;
 	}
 
-	public void setTotime(Date totime) {
+	public void setTotime(Time totime) {
 		this.totime = totime;
 	}
 
@@ -117,14 +86,6 @@ public class DailyEntry {
 		this.project = project;
 	}
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 	public double getNoofhours() {
 		return noofhours;
 	}
@@ -132,9 +93,15 @@ public class DailyEntry {
 	public void setNoofhours(double noofhours) {
 		this.noofhours = noofhours;
 	}
-	
-	
-	
+
+	public Timesheet getTimesheet() {
+		return timesheet;
+	}
+
+	public void setTimesheet(Timesheet timesheet) {
+		this.timesheet = timesheet;
+	}
+
 	
 
 }

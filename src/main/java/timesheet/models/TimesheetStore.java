@@ -2,6 +2,8 @@ package timesheet.models;
 
 
 
+import java.util.Date;
+
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 public interface TimesheetStore  extends CrudRepository<Timesheet, Long>{
 	//public List<Timesheet> findAllTimesheet();
 	public Timesheet findByUser(User user);
+	
+	public Timesheet findByUserAndStartdate(User user,Date startdate);
 
 
 }

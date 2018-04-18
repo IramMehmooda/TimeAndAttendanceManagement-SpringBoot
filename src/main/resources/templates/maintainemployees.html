@@ -33,6 +33,9 @@
           <form action="#" th:action="@{'/maintainemployees?username={username}'(username=${emp.username})}" th:method="delete" >
 			  <button type="submit">Delete</button>
 		  </form>
+		  <form action="#" th:action="@{'/editemployee/{username}'(username=${emp.username})}" ><!-- th:method="edit" -->
+			  <button type="submit">Edit</button>
+		  </form>
         </td>
         <!-- <td>
           <form action="#" th:action="@{/maintainemployees/edit/}+${emp.username}">

@@ -6,19 +6,40 @@
 
 <div class="container">
     <h3>Your Timesheet</h3>
-<!--     <form action="#" th:object="${supervisorname}"   th:object="${supervisors}" method="POST" class="form-horizontal" > -->
  
- <!-- <form  method="POST" class="form-horizontal" action="#" th:object="${timesheet}" ></form> -->
- 
- <form action="#" th:action="@{/createtimesheet}" method="post" >
+<form method="POST" class="form-narrow form-horizontal" action="createTimesheet">
+
 <div>
-		Username: <p th:text="${User.username}"/>
-                    </div>
+
+		
 		
 		<div class="form-group">
-            <label class="control-label col-sm-2" for="budget">Date: </label>
+            <label class="control-label col-sm-2" for="date">Date: </label>
             <div class="col-sm-10">
-                <input id="date" type="date" name="date" autocomplete="new-password"/>
+                <input id="date" type="date" pattern="YYYY-MM-DD" name="date" min="2000-04-12" max="2018-04-21" autocomplete="new-password"/>
+            </div>
+        </div>
+        <div class="form-group">
+            Select Project For Timesheet: 
+            <select class="form-control" th:field="*{entries.project}">
+            <option th:each="project : ${empprojects}" th:value="${project.title}" th:text="${project.title}">
+    		</option>
+    		</select>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="fromtime">From Time: </label>
+            <div class="col-sm-10">
+                <div class="col-sm-10">
+                <input id="fromtime" type="time" name="fromtime" pattern="[0-9]{2}:[0-9]{2}"  step="900" autocomplete="new-password"/>
+            </div>
+            </div>
+            
+        </div>
+        
+         <div class="form-group">
+            <label class="control-label col-sm-2" for="totime">To Time: </label>
+            <div class="col-sm-10">
+                <input id="totime" type="time" name="totime" pattern="[0-9]{2}:[0-9]{2}"  step="900" autocomplete="new-password"/>
             </div>
         </div>
         <div>
@@ -30,6 +51,7 @@
             </div>
         </div>
 			  </div>
+		</div>
 		  </form>
 		
 		
@@ -37,9 +59,9 @@
 		<!-- <p> Add Employee : <a href="/register"> here</a> </p> -->
 
 	
-     
+     </div>
     
-</div>
+
 
 <div th:replace="fragments :: bottom"></div>
 

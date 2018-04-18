@@ -26,6 +26,5 @@ public interface UserBaseStore<T extends User> extends CrudRepository<T, Long>{
 	
 	
 	
-	
 
 }
