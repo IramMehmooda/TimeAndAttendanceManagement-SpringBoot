@@ -11,7 +11,7 @@ select * from user where user_id = 1016;
 select * from project;
 select * from project_employee;
 
-delete from project_employee where project_id = 5000 and user_id = 1009;
+delete from project_employee where project_id = 5002 and user_id = 1009;
 select * from timesheet;
 select * from dailyentry;
 select * from user where user_type="supervisor";
