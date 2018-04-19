@@ -8,42 +8,7 @@
 <div class="container">
     <h3>You have logged into the Time and Attendance Management System</h3>
     <p th:text="${message}"/>
-    Here you can access our valuable content.
-    <p>
-        Add new Employee: <a href="register">
-        <button><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;Add Employee</button>
-    </a>
-    </p><br></br><br></br>
-    <p>
-        Add new Supervisor: <a href="supervisorregister">
-        <button><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;Add Supervisor</button>
-    </a>
-    </p>
-    Or you can <a href="logout">
-    <button><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout</button>
-</a>
-
-</div>
-
-<div class="container">
-    <table id="myTableId" dt:table="true">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>LastName</th>
-                <th>FirstName</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="person : ${persons}">
-                <td th:text="${person?.id}">1</td>
-                <td th:text="${person?.lastName}">Doe</td>
-                <td th:text="${person?.firstName}">John</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
+  </div>
 <div th:replace="fragments :: bottom"></div>
 
 </body>

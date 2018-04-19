@@ -142,7 +142,7 @@ public class DemoController {
             	else if (user instanceof Supervisor)
             		userType = "Supervisor";
             	
-                model.addAttribute("message", user.getUsername() + ": welcome back !" + "\n You have logged in as "+userType + user.getDiscriminatorValue());
+                model.addAttribute("message", user.getUsername() + ": welcome back !" + "\n You have logged in as  "+userType /*+ user.getDiscriminatorValue()*/);
                 model.addAttribute("User", user);
                 return "content";
             } else {
