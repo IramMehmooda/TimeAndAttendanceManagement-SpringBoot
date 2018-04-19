@@ -1,5 +1,6 @@
 package timesheet;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -20,9 +21,10 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
-
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 
@@ -78,6 +80,49 @@ public class TimesheetController {
     public String timeFormat() {
         return "HH:mm";
     }
+    
+    @GetMapping("/viewmytimesheet")
+    public String viewMyTimesheet(Model model) {
+        if (model.asMap().containsKey("User")) {
+        	User user = (User) model.asMap().get("User");
+        	 List<Timesheet> timesheets = (List<Timesheet>) timesheetStore.findByUser(user);
+        	 System.out.println(timesheets + "this is the list returned");
+        	 model.addAttribute("timesheets", timesheets);
+        	//model.addAttribute("supervisor", supervisor);
+        	
+            return "viewmytimesheet";
+        } else {
+        	
+            model.addAttribute("message", "Please login first");
+            return "home";
+        }
+    }
+    
+    @GetMapping("/viewmytimesheet/{emp.username}")
+    public String viewMyTimesheetwithId(@PathVariable("emp.username") String username,Model model) {
+        if (model.asMap().containsKey("User")) {
+        	System.out.println(username+ "heroweiuro wei;h;oilhafsd;hf;kjasdhk;jfkdjsh kfk");
+        	User user = userStore.findByUsername(username);
+        	 List<Timesheet> timesheets = (List<Timesheet>) timesheetStore.findByUser(user);
+        	 System.out.println(timesheets + "this is the list returned");
+        	 model.addAttribute("timesheets", timesheets);
+        	//model.addAttribute("supervisor", supervisor);
+        	
+            return "viewmytimesheet";
+        } else {
+        	
+            model.addAttribute("message", "Please login first");
+            return "home";
+        }
+    }
+    
+    @RequestMapping(value="/viewmytimesheet", method=RequestMethod.DELETE)
+	public void deletetimesheet(Long timesheet_id,Model model) {
+    		 timesheetStore.delete((long)timesheet_id);
+    		 viewMyTimesheet(model);
+    		
+		
+	}
 	
     @GetMapping(value="/createtimesheet")
     public String addTimeSheetForm(Model model) {
@@ -129,21 +174,25 @@ public class TimesheetController {
     		User user = (User) model.asMap().get("User");
     		//Employee employee = employeeStore.findByUsername(user.getUsername());
     		//Date date=timesheet.getStartdate();
-    		System.out.println(timesheet.getStartdate());
-    		Timesheet ts1;
     		
-    			ts1 = new Timesheet();
-    		
-    		//ts1.setStartdate(timesheet.getStartdate());
-    		System.out.println(timesheet.getProject() +"this is the project");
+    		Timesheet ts1 = new Timesheet();
+    		try {
+				ts1.setStartdate(new SimpleDateFormat("yyyy-mm-dd").parse(timesheet.getStartdate()));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    		ts1.setFromtime(timesheet.getFromtime());
+    		ts1.setTotime(timesheet.getTotime());
     		ts1.setUser(user);
+    		Project proj1 = projectStore.findByTitle(timesheet.getProject());
+    		ts1.setProject(proj1);
+    		double hours = ((timesheet.getTotime().getTime()-timesheet.getFromtime().getTime())/(60*60*1000))%24;
+    		ts1.setNoofhours(hours);
     		
-    		System.out.println("yes i am before saving lets see the values");
-    		System.out.println(timesheet.getFromtime());
-    		System.out.println(timesheet.getTotime());
-    		//System.out.println(timesheetStore.save(ts1));
+    		timesheetStore.save(ts1);
     	}
-    	return "/createtimesheet";
+    	return "home";
     }
     
     

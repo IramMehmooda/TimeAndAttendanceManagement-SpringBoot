@@ -6,10 +6,11 @@ drop table user;
 drop table dailyentry;
 drop table project;
 drop table timesheet
-select * from timesheet;
+delete t from timesheet t where timesheet_id =3;
+
 select * from user where username = "Bhamati";
 
-delete t from timesheet t where user_user_id = 1016;
+delete * from timesheet t where project_project_id = "null";
 
 select * from project;
 select * from project_employee;

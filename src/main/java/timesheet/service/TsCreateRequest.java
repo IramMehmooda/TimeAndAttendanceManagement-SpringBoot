@@ -35,7 +35,7 @@ public class TsCreateRequest {
 
 	private Date totime;
 
-	Project project;
+	String project;
 	
 	double noofhours;
 
@@ -79,11 +79,11 @@ public class TsCreateRequest {
 		this.totime = totime;
 	}
 
-	public Project getProject() {
+	public String getProject() {
 		return project;
 	}
 
-	public void setProject(Project project) {
+	public void setProject(String project) {
 		this.project = project;
 	}
 
