@@ -130,40 +130,27 @@ public class EmployeeController {
 	    }*/
 	    
 	    
-	    @PostMapping("/editemployee")
-	    public String editEmployeeregister(@ModelAttribute("employee") EmployeeCreateReq employee,Model model , BindingResult result) {
+	    @PostMapping("/editemployee/{username}")
+	    public String editEmployeeregister(@ModelAttribute("employee") EmployeeCreateReq employee,@PathVariable("username") String username,Model model , BindingResult result) {
 	    	if(!result.hasErrors()) {
 	    		
 	    		System.out.println(employee.toString());
-	    		Employee employeesave = new Employee();
+	    		
+	    		Employee employeesave = employeeStore.findByUsername(username);
+	    		
+	    		employeesave.setUsername(employee.getUsername());
+	    		employeesave.setEmail(employee.getEmail());
+	    		employeesave.setAddress(employee.getAddress());
+	    		employeesave.setFullname(employee.getFullname());
+	    		employeesave.setPhone_no(employee.getPhone_no());
+	    		employeesave.setJob_title(employee.getJob_title());
+	    		employeesave.setSalary(employee.getSalary());
+	    		
 	    		employeeStore.save(employeesave);
 	    		
-	    		/*long budget = (long)project.getBudget();
-	    		String title = project.getTitle();
-	    		String customer = project.getCustomer();
 	    		
-	    		Supervisor supervisor = supervisorStore.findByUsername(supervisorname);
-	    	
-	    		
-	    		
-	    		 Project p1 = projectStore.findByTitle(title);
-	    		 
-	    		// p1.setCustomer(project.getCustomer());
-	    		 for(Employee useremp : project.getEmplist()) {
-	    		 for(Employee emp : p1.getEmplist()) {
-	    			 if(emp.getUser_id()==useremp.getUser_id())
-	    				 project.getEmplist().remove(emp);
-	    		 }
-	    		 }
-	    		 p1.getEmplist().addAll(project.getEmplist());
-	    		 //p1.getEmplist().addAll(project.getEmplist());
-	    		 
-	    		 projectStore.save(p1);*/
-	    		
-	    		
-	    		//projectStore.save(new Project(title,budget,customer,supervisor,null));
-	    		//save project
 	    	}
+	    	model.addAttribute("message", "Employee " + employee.getUsername() +"has been successfully modified");
 	    	return "home";
 	    }
 	   
