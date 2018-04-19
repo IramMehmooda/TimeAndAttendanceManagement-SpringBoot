@@ -30,8 +30,8 @@ public abstract class User {
 	@NotNull
 	private String password;
 	
-	/*@OneToMany(mappedBy = "user" , cascade= CascadeType.ALL,fetch = FetchType.LAZY)
-	private List<Timesheet> timesheets;*/
+	@OneToMany(mappedBy = "user" , cascade= CascadeType.ALL,fetch = FetchType.LAZY)
+	private List<Timesheet> timesheets;
 
 	public User() {
 		super();
@@ -47,6 +47,16 @@ public abstract class User {
 		this.timesheets = timesheets;
 	}
 */
+
+	public List<Timesheet> getTimesheets() {
+		return timesheets;
+	}
+
+
+	public void setTimesheets(List<Timesheet> timesheets) {
+		this.timesheets = timesheets;
+	}
+
 
 	public long getUser_id() {
 		return user_id;

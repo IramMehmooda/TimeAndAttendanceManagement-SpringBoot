@@ -20,17 +20,14 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 
 import timesheet.Utils;
-import timesheet.models.DailyEntry;
-import timesheet.models.DailyEntryStore;
+
 import timesheet.models.Employee;
 import timesheet.models.EmployeeStore;
 import timesheet.models.Project;
@@ -66,17 +63,20 @@ public class TimesheetController {
 	SupervisorStore supervisorStore;
 	
 
-    @Autowired
-    DailyEntryStore dailyEntryStore;
 	
 	
     @InitBinder
     public void initDateBinder(final WebDataBinder binder) {
-           binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-mm-dd"), true));
+           binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat(timeFormat()), true));
     }
+    
     @ModelAttribute("dateFormat")
     public String dateFormat() {
-        return "yyyy-mm-dd";
+        return "yyyy-MM-dd";
+    }
+    @ModelAttribute("timeFormat")
+    public String timeFormat() {
+        return "HH:mm";
     }
 	
     @GetMapping(value="/createtimesheet")
@@ -94,7 +94,6 @@ public class TimesheetController {
  	        	if(user1.getDiscriminatorValue().equalsIgnoreCase("employee")) {
  	        		Employee employee=employeeStore.findByUsername(user.getUsername());
  	        		List<Project> empprojects =employee.getProject();
- 	        		System.out.println("I am an employee");
  	        		model.addAttribute("employee",employee);
  	        		model.addAttribute("empprojects",empprojects);
  	        	}
@@ -104,9 +103,12 @@ public class TimesheetController {
  	        		model.addAttribute("employee",supervisor);
  	        		model.addAttribute("empprojects",empprojects);
  	        	}
- 	        	model.addAttribute("dailyentry", new DailyEntry());
+ 	        	//model.addAttribute("dailyentry", new DailyEntry());
  	        	Timesheet timesheet = new Timesheet();
  	        	timesheet.setStartdate(new Date());
+ 	        	timesheet.setFromtime(new Date());
+ 	        	timesheet.setTotime(new Date());
+ 	        	
  	        	model.addAttribute("timesheet", timesheet);
  	        	
  	        	
@@ -126,13 +128,20 @@ public class TimesheetController {
     		
     		User user = (User) model.asMap().get("User");
     		//Employee employee = employeeStore.findByUsername(user.getUsername());
-    		Date date=timesheet.getStartdate();
-    		System.out.println(date);
+    		//Date date=timesheet.getStartdate();
     		System.out.println(timesheet.getStartdate());
-    		Timesheet ts1 = new Timesheet();
-    		ts1.setStartdate(timesheet.getStartdate());
+    		Timesheet ts1;
+    		
+    			ts1 = new Timesheet();
+    		
+    		//ts1.setStartdate(timesheet.getStartdate());
+    		System.out.println(timesheet.getProject() +"this is the project");
     		ts1.setUser(user);
-    		System.out.println(timesheetStore.save(ts1));
+    		
+    		System.out.println("yes i am before saving lets see the values");
+    		System.out.println(timesheet.getFromtime());
+    		System.out.println(timesheet.getTotime());
+    		//System.out.println(timesheetStore.save(ts1));
     	}
     	return "/createtimesheet";
     }

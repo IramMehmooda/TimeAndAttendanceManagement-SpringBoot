@@ -10,7 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -31,99 +31,107 @@ public class Timesheet {
     @GeneratedValue(strategy=GenerationType.AUTO)
 	long timesheet_id;
 	
-	@OneToOne
+	@ManyToOne
 	private User user;
 	
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern="yyyy-mm-dd")
+	@DateTimeFormat(pattern="dd-MMM-yyyy")
 	private Date startdate;
 	
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern="yyyy-mm-dd")
-	private Date endDate;
 	
+	@Temporal(TemporalType.TIME)
+	@DateTimeFormat(pattern="hh:mm a")
+	private Date fromtime;
 	
-
-	@OneToMany(mappedBy = "timesheet", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	List<DailyEntry> entries;
-
-
-
-	public Timesheet() {
-		super();
-	}
-
-
+	@Temporal(TemporalType.TIME)
+	@DateTimeFormat(pattern="hh:mm a")
+	private Date totime;
+	@ManyToOne
+	Project project;
+	
+	double noofhours;
 
 	public long getTimesheet_id() {
 		return timesheet_id;
 	}
 
-
-
 	public void setTimesheet_id(long timesheet_id) {
 		this.timesheet_id = timesheet_id;
 	}
-
-
 
 	public User getUser() {
 		return user;
 	}
 
-
-
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-
 
 	public Date getStartdate() {
 		return startdate;
 	}
 
-
-
 	public void setStartdate(Date startdate) {
 		this.startdate = startdate;
 	}
 
-
-
-	
-
-
-	public List<DailyEntry> getEntries() {
-		return entries;
+	public Date getFromtime() {
+		return fromtime;
 	}
 
-
-
-	public void setEntries(List<DailyEntry> entries) {
-		this.entries = entries;
+	public void setFromtime(Date fromtime) {
+		this.fromtime = fromtime;
 	}
 
-
-
-	public Timesheet(User user, Date startdate, List<DailyEntry> entries) {
-		super();
-		this.user = user;
-		this.startdate = startdate;
-		
-		this.entries = entries;
+	public Date getTotime() {
+		return totime;
 	}
 
-	public Timesheet(User user, Date startdate) {
-		super();
-		this.user = user;
-		this.startdate = startdate;
+	public void setTotime(Date totime) {
+		this.totime = totime;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+	public double getNoofhours() {
+		return noofhours;
+	}
+
+	public void setNoofhours(double noofhours) {
+		this.noofhours = noofhours;
 	}
 
 	@Override
 	public String toString() {
-		return "Timesheet [timesheet_id=" + timesheet_id + ", user=" + user + ", startdate=" + startdate + ", entries=" + entries + "]";
+		return "Timesheet [timesheet_id=" + timesheet_id + ", user=" + user + ", startdate=" + startdate + ", fromtime="
+				+ fromtime + ", totime=" + totime + ", project=" + project + ", noofhours=" + noofhours + "]";
 	}
+
+	public Timesheet(long timesheet_id, User user, Date startdate, Date fromtime, Date totime, Project project,
+			double noofhours) {
+		super();
+		this.timesheet_id = timesheet_id;
+		this.user = user;
+		this.startdate = startdate;
+		this.fromtime = fromtime;
+		this.totime = totime;
+		this.project = project;
+		this.noofhours = noofhours;
+	}
+
+	public Timesheet() {
+		super();
+	}
+	
+	
+
+	
 	
 	
 	/*

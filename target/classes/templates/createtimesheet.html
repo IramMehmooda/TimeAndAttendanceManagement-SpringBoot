@@ -16,9 +16,37 @@
 		<div class="form-group">
             <label class="control-label col-sm-2" for="date">Date: </label>
             <div class="col-sm-10">
-                <input id="startdate" class="form-control" type="date" th:type="date" th:value="${#dates.format(timesheet.startdate, dateFormat)}"   pattern="yyyy-mm-dd" name="startdate"  max="2018-04-21" />
+                <input id="startdate" class="form-control" type="date" th:type="date" th:value="${#dates.format(timesheet.startdate, 'dd-MMM-yyyy')}"   name="startdate"  max="2018-04-21" />
             </div>
         </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="fromtime">From Time: </label>
+            <div class="col-sm-10">
+                <div class="col-sm-10">
+                <input id="fromtime" type="time" th:value="${#dates.format(timesheet.fromtime, timeFormat)}" name="fromtime"   step="900" />
+            </div>
+            </div>
+            
+        </div>
+        
+         <div class="form-group">
+            <label class="control-label col-sm-2" for="budget">To Time: </label>
+            <div class="col-sm-10">
+                <input id="totime" type="time" th:value="${#dates.format(timesheet.totime, timeFormat)}" name="totime"  step="900" />
+            </div>
+        </div>
+        <div class="form-group">
+
+            Project: 
+            <select class="form-control" th:field="*{project}">
+
+    <option th:each="project : ${empprojects}" th:value="*{project}" th:text="${project.title}">
+    </option>
+    </select>
+   
+    
+            </div>
+        
         
         <div>
 			  <div class="form-group">

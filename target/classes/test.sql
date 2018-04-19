@@ -1,12 +1,15 @@
 
 show tables;
 drop table employee;
+drop table project_employee
 drop table user;
 drop table dailyentry;
 drop table project;
+drop table timesheet
+select * from timesheet;
 select * from user where username = "Bhamati";
 
-select * from timesheet;
+delete t from timesheet t where user_user_id = 1016;
 
 select * from project;
 select * from project_employee;
@@ -50,15 +53,13 @@ insert into user(username,password,user_type,fullname,address,email,phone_no,job
 insert into user(username,password,user_type,fullname,address,email,phone_no,job_title,salary,ssn) values("jason","password","supervisor","jason matthew","DeKalb,IL,USA","whitesell.niu@gmail.com",6789087689,"Team Lead-CRM",200000,87887866);
 insert into user(username,password,user_type,fullname,address,email,phone_no,job_title,salary,ssn) values("devon","password","supervisor","devon Joe","DeKalb,IL,USA","Insley.niu@gmail.com",6789087689,"Team Lead-CRM",200000,87887866);
 
+select * from timesheet;
 
 
-insert into timesheet(end_date,startdate,user_user_id) values(DATE '2018-04-16',DATE '2018-04-16',1003);
+insert into timesheet(fromtime,noofhours,totime,project_project_id,startdate,user_user_id) values(DATETIME '2018-03-18 09:00',1,DATE '06:00:00',5001,DATE '2018-04-16',1003);
 
 
 
-
-
-insert into dailyentry(id,date,fromtime,totime,noofhours,project_project_id,timesheet_id,user_user_id) values (8001,)
 
 
 
