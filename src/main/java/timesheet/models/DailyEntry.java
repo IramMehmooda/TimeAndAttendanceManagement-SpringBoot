@@ -26,11 +26,19 @@ public class DailyEntry {
 	@Id
 	@GeneratedValue
 	private Long id;
-	private Time fromtime;
-	private Time totime;
+	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern="yyyy-MM-dd hh:mm a")
+	private Date fromtime;
+	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern="yyyy-MM-dd hh:mm a")
+	private Date totime;
 	@ManyToOne
 	Project project;
+	
 	double noofhours;
+	
 	@ManyToOne( fetch = FetchType.LAZY)
 	@JoinColumn(name="timesheet_id")
 	Timesheet timesheet;
@@ -62,7 +70,7 @@ public class DailyEntry {
 		this.id = id;
 	}
 
-	public Time getFromtime() {
+	public Date getFromtime() {
 		return fromtime;
 	}
 
@@ -70,7 +78,7 @@ public class DailyEntry {
 		this.fromtime = fromtime;
 	}
 
-	public Time getTotime() {
+	public Date getTotime() {
 		return totime;
 	}
 

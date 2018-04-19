@@ -64,12 +64,7 @@ public class TimesheetController {
     @Autowired
     DailyEntryStore dailyEntryStore;
 	
-	/*@GetMapping(value="/listTimesheets")
-    public String listTimeSheets( Model model) {
-        model.addAttribute("timesheets", Utils.toList(timesheetStore.findAll()));
-        return "listTimesheets";
-    }
-	*/
+	
 	
 	
     @GetMapping(value="/createTimesheet")
@@ -82,6 +77,7 @@ public class TimesheetController {
  	        	System.out.println(model.asMap().get("User") + "yes i got this user");
  	        	System.out.println(user.getUsername());
  	        	User user1 = userStore.findByUsername(user.getUsername());
+ 	        	
  	        	if(user1.getDiscriminatorValue().equalsIgnoreCase("employee")) {
  	        		Employee employee=employeeStore.findByUsername(user.getUsername());
  	        		List<Project> empprojects =employee.getProject();
@@ -89,14 +85,16 @@ public class TimesheetController {
  	        		model.addAttribute("employee",employee);
  	        		model.addAttribute("empprojects",empprojects);
  	        	}
- 	        	if(user1.getDiscriminatorValue().equalsIgnoreCase("supervisor")) {
+ 	        	else if(user1.getDiscriminatorValue().equalsIgnoreCase("supervisor")) {
  	        		Supervisor supervisor = supervisorStore.findByUsername(user.getUsername());
  	        		List<Project> empprojects = projectStore.findBySupervisor(supervisor);
  	        		model.addAttribute("employee",supervisor);
  	        		model.addAttribute("empprojects",empprojects);
  	        	}
- 	        	model.addAttribute("entries", new DailyEntry());
+ 	        	model.addAttribute("dailyentry", new DailyEntry());
  	        	model.addAttribute("timesheet", new Timesheet());
+ 	        	
+ 	        	
     		 return "createTimesheet";
     	 }
     	 else {
@@ -105,38 +103,24 @@ public class TimesheetController {
              return "home";
          }
     }
+    
+    
     @PostMapping("/createtimesheet")
-    public String createTimesheet(@RequestParam(value = "date") String date,
-    		@RequestParam(value = "entries.project") String project,
-    		@RequestParam(value = "fromtime") String fromtime,
-    		@RequestParam(value = "totime") String totime,
-            Model model) {
-    	try {
-    		if (model.asMap().containsKey("User")) {
-            	
-            	User user = (User) model.asMap().get("User");
-            	
-            	
-            	User user1 = userStore.findByUsername(user.getUsername());
-    		
-    	System.out.println(user +"in the createtimesheet page");
-		
-		
-		System.out.println(date);
-		
-		
-		//timesheetStore.save(new Timesheet(user1,date));
-	
-    		}
-	return "content";
+    public String createTimesheet(@ModelAttribute("timesheet") TsCreateRequest timesheet , Model model, BindingResult result) {
     	
+    	if(!result.hasErrors()) {
+    		Date date=timesheet.getStartdate();
+    		String title = project.getTitle();
+    		String customer = project.getCustomer();
+    		System.out.println(project.getCustomer());
+    		System.out.println(project.getSupervisorname());
+    		System.out.println(employees +"yes got it");
+    		Supervisor supervisor = supervisorStore.findByUsername(supervisorname);
     		
-    		
-    }
-    	catch(Exception ex) {
-    		return "user not found"+ex.getMessage();
-    	}	
-    }
+    		projectStore.save(new Project(title,budget,customer,supervisor,null));
+    		//save project
+    	}
+    	return "redirect:/";
     
 } 	
     	

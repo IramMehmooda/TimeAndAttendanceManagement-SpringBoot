@@ -8,7 +8,8 @@ import timesheet.models.DailyEntry;
 import timesheet.models.User;
 
 public class TsCreateRequest {
-long timesheet_id;
+	
+	long timesheet_id;
 	
 	
 	private User user;
@@ -16,10 +17,26 @@ long timesheet_id;
 	
 	private Date startdate;
 	
+	private Date enddate;
+	
 	
 
 	
 	List<DailyEntry> entries;
+
+
+
+
+	public Date getEnddate() {
+		return enddate;
+	}
+
+
+
+
+	public void setEnddate(Date enddate) {
+		this.enddate = enddate;
+	}
 
 
 

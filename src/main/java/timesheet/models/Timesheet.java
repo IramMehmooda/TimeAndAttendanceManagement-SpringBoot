@@ -39,6 +39,7 @@ public class Timesheet {
 	private Date startdate;
 	
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date endDate;
 	
 	
