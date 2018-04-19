@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<div th:replace="fragments :: top"></div>
+
+<div class="container">
+    <h3> View My timesheets</h3>
+
+	
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <td>Timesheet ID</td>
+            <td> start date</td>
+            <td>from time</td>
+            <td> to time</td>
+            <td>project</td>
+            <td> no of hours</td>
+            <td> <a href="/createtimesheet"> Add timesheet</a> </td>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- <tr th:if="${tasks.empty}">
+            <td colspan="4">No tasks</td>
+          </tr> -->
+          <tr th:each="timesheet : ${timesheets}">
+            <td th:text="${timesheet.timesheet_id}">1</td>
+            <td th:text="${timesheet.startdate}">sdfs</td>
+            <td th:text="${timesheet.fromtime}">1ssdfd</td>
+            <td th:text="${timesheet.noofhours}">1ssdfd</td>
+            <td th:text="${timesheet.project.project_id}">1sfsdffdd</td>
+            <td>
+          <form action="#" th:action="@{'/viewmytimesheet?timesheet_id={timesheet_id}'(timesheet_id=${timesheet.timesheet_id})}" th:method="delete" >
+			  <button type="submit">Delete</button>
+		  </form>
+		 <!--  <form action="#" th:action="@{'/editemployee/{username}'(username=${emp.username})}" >th:method="edit"
+			  <button type="submit">Edit</button>
+		  </form> -->
+        </td>
+        <!-- <td>
+          <form action="#" th:action="@{/maintainemployees/edit/}+${emp.username}">
+			  <button type="submit">Edit</button>
+		  </form>
+        </td> -->
+       <!--  <td>
+          <form action="#" th:action="@{'/createTimesheet'}" th:method="get" >
+          	  <input type="hidden" name="employeeId" th:value="${e.id}"/>
+			  <button type="submit">Create Timesheet</button>
+		  </form>
+        </td> -->
+            
+<!--             <td><a href="view.html" th:href="@{'/' + ${task.id}}" th:text="${task.title}">Title ...</a></td> -->
+            
+          </tr>
+        </tbody>
+      </table>
+		
+		
+	</div>
+
+<div th:replace="fragments :: bottom"></div>
+
+
+</body>
+</html>

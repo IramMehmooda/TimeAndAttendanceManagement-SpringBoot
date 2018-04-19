@@ -40,7 +40,7 @@
             Project: 
             <select class="form-control" th:field="*{project}">
 
-    <option th:each="project : ${empprojects}" th:value="*{project}" th:text="${project.title}">
+    <option th:each="project : ${empprojects}" th:value="${project.title}" th:text="${project.title}">
     </option>
     </select>
    
