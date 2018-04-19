@@ -7,28 +7,39 @@
 <div class="container">
     <h3>Generate Summary</h3>
  
-<form method="POST" class="form-narrow form-horizontal" action="createTimesheet">
 
 <div>
         <div class="form-group">
             Select Project For Summary: 
-            <select class="form-control" ><!--  th:field="*{entries.project}"-->
-            <option th:each="project : ${supprojects}" th:value="${project.title}" th:text="${project.title}">
+            <select class="form-control">
+            <option th:each="project : ${supprojects}" th:value="${project.getTitle()}" th:text="${project.getTitle()}">
     		</option>
     		</select>
         </div>
         <div class="form-group">
+        
         Summary By Date:
             <label class="control-label col-sm-2" for="date">Date: </label>
             <div class="col-sm-10">
-                <input id="date" type="date" pattern="YYYY-MM-DD" name="date" min="2000-04-12" max="2018-04-21" autocomplete="new-password"/>
+                <input id="startdate" class="form-control" type="date" th:type="date" th:value="${#dates.format(timesheet.startdate, 'dd-MMM-yyyy')}"   name="startdate"  max="2018-04-21" />
             </div>
         </div>
-        <div class="form-group">
+        <form method="get" class="form-narrow form-horizontal" th:action="@{/generatesummary/{title}/date/{date}(title=${project.getTitle()}, date=${date})}">
+        
+        <div>
+			  <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit">
+                    See By Date
+                </button>
+            </div>
+        </div>
+			  </div>
+        <!-- <div class="form-group">
         Summary By Month:
             <label class="control-label col-sm-2" for="date">Month: </label>
             <div class="col-sm-10">
-                <input id="date" type="date" pattern="YYYY-MM-DD" name="date" min="2000-04-12" max="2018-04-21" autocomplete="new-password"/>
+                <input id="date" type="date" pattern="MM" name="date" autocomplete="new-password"/>
             </div>
         </div>
         <div class="form-group">
@@ -42,11 +53,11 @@
         Summary By Date Range:
             <label class="control-label col-sm-2" for="date">From Date: </label>
             <div class="col-sm-10">
-                <input id="date" type="date" pattern="YYYY-MM-DD" name="date" min="2000-04-12" max="2018-04-21" autocomplete="new-password"/>
+                <input id="date" type="date" pattern="YYYY-MM-DD" name="date"/>
             </div>
             <label class="control-label col-sm-2" for="date">To Date: </label>
             <div class="col-sm-10">
-                <input id="date" type="date" pattern="YYYY-MM-DD" name="date" min="2000-04-12" max="2018-04-21" autocomplete="new-password"/>
+                <input id="date" type="date" pattern="YYYY-MM-DD" name="date"/>
             </div>
         </div>
         
@@ -59,8 +70,9 @@
             </div>
         </div>
 			  </div>
+		</div> -->
 		</div>
-		  </form>
+		  </form> 
 		
 		
 		

@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<div th:replace="fragments :: top"></div>
+
+<div class="container">
+    
+<h3>Report for Project </h3><h3 th:text="${project.title}"></h3>
+<table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <td>Employee Username</td>
+            <td> Number Of Hours</td>
+          </tr>
+        </thead>
+        <tbody>
+           <tr th:each="timesht : ${timesheetlist}">
+            <td th:text="${timesht.user.username}">1</td>
+            <td th:text="${timesht.noofhours}">1</td>
+            </tr>
+            </tbody>
+            </table>
+            </div>
+ <div th:replace="fragments :: bottom"></div>
+
+
+</body>
+</html>           

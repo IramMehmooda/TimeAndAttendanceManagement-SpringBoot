@@ -9,7 +9,7 @@ drop table timesheet
 select * from timesheet;
 select * from user where username = "Bhamati";
 
-delete t from timesheet t where user_user_id = 1016;
+select * from project where user_id = 1016;
 
 select * from project;
 select * from project_employee;

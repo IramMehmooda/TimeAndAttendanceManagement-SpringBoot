@@ -46,8 +46,9 @@ public class Timesheet {
 	@Temporal(TemporalType.TIME)
 	@DateTimeFormat(pattern="hh:mm a")
 	private Date totime;
+	
 	@ManyToOne
-	Project project;
+	private Project project;
 	
 	double noofhours;
 
