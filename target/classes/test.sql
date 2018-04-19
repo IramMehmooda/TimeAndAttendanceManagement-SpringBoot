@@ -6,7 +6,7 @@ drop table dailyentry;
 drop table project;
 select * from user where username = "Bhamati";
 
-select * from user where user_id = 1016;
+select * from timesheet;
 
 select * from project;
 select * from project_employee;

@@ -35,11 +35,11 @@ public class Timesheet {
 	private User user;
 	
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat(pattern="yyyy-mm-dd")
 	private Date startdate;
 	
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat(pattern="yyyy-mm-dd")
 	private Date endDate;
 	
 	

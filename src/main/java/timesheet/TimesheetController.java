@@ -1,5 +1,6 @@
 package timesheet;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -9,12 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.annotations.GenerationTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.annotation.ComponentScan;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -66,7 +70,14 @@ public class TimesheetController {
     DailyEntryStore dailyEntryStore;
 	
 	
-	
+    @InitBinder
+    public void initDateBinder(final WebDataBinder binder) {
+           binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-mm-dd"), true));
+    }
+    @ModelAttribute("dateFormat")
+    public String dateFormat() {
+        return "yyyy-mm-dd";
+    }
 	
     @GetMapping(value="/createtimesheet")
     public String addTimeSheetForm(Model model) {
@@ -77,6 +88,7 @@ public class TimesheetController {
  	        	
  	        	System.out.println(model.asMap().get("User") + "yes i got this user");
  	        	System.out.println(user.getUsername());
+ 	        	System.out.println(dateFormat());
  	        	User user1 = userStore.findByUsername(user.getUsername());
  	        	
  	        	if(user1.getDiscriminatorValue().equalsIgnoreCase("employee")) {
@@ -93,7 +105,9 @@ public class TimesheetController {
  	        		model.addAttribute("empprojects",empprojects);
  	        	}
  	        	model.addAttribute("dailyentry", new DailyEntry());
- 	        	model.addAttribute("timesheet", new Timesheet());
+ 	        	Timesheet timesheet = new Timesheet();
+ 	        	timesheet.setStartdate(new Date());
+ 	        	model.addAttribute("timesheet", timesheet);
  	        	
  	        	
     		 return "createtimesheet";
@@ -106,6 +120,25 @@ public class TimesheetController {
     }
     
     
+    @PostMapping("/createtimesheet")
+    public String createTimesheet(@ModelAttribute("timesheet") TsCreateRequest timesheet , Model model, BindingResult result) {
+    	if(!result.hasErrors()) {
+    		
+    		User user = (User) model.asMap().get("User");
+    		//Employee employee = employeeStore.findByUsername(user.getUsername());
+    		Date date=timesheet.getStartdate();
+    		System.out.println(date);
+    		System.out.println(timesheet.getStartdate());
+    		Timesheet ts1 = new Timesheet();
+    		ts1.setStartdate(timesheet.getStartdate());
+    		ts1.setUser(user);
+    		System.out.println(timesheetStore.save(ts1));
+    	}
+    	return "/createtimesheet";
+    }
+    
+    
+  /*  
     @PostMapping("/createtimesheet")
     public String createTimesheet(@ModelAttribute("timesheet") TsCreateRequest timesheet ,@ModelAttribute("dailyentry") DailyEntryCreateRequest dailyentry , Model model, BindingResult result) {
     	
@@ -142,7 +175,7 @@ public class TimesheetController {
     	return "/createtimesheet";
     
     }
-    
+    */
   /*  @PostMapping("/createtimesheet")
     public String createentries(@ModelAttribute("timesheet") TsCreateRequest timesheet,@ModelAttribute("dailyentry") DailyEntryCreateRequest dailyentry , Model model, BindingResult result) {
     	

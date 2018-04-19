@@ -38,8 +38,8 @@
                     <li th:classappend="${page == 'projectregister' ? 'active' : ''}">
                         <a href="#" th:href="@{/projectregister}">Add Project</a>
                     </li>
-                    <li th:classappend="${page == 'createTimesheet' ? 'active' : ''}">
-                        <a href="#" th:href="@{/createTimesheet}">Add Timesheet</a>
+                    <li th:classappend="${page == 'createtimesheet' ? 'active' : ''}">
+                        <a href="#" th:href="@{/createtimesheet}">Add Timesheet</a>
                     </li>
                     
                     <li th:classappend="${page == 'maintainemployees' ? 'active' : ''}" th:if="${User != null and User.getDiscriminatorValue() == 'admin'}" >

@@ -16,7 +16,7 @@
 		<div class="form-group">
             <label class="control-label col-sm-2" for="date">Date: </label>
             <div class="col-sm-10">
-                <input id="date" type="date" pattern="yyyy-MM-dd" name="date"  max="2018-04-21" />
+                <input id="startdate" class="form-control" type="date" th:type="date" th:value="${#dates.format(timesheet.startdate, dateFormat)}"   pattern="yyyy-mm-dd" name="startdate"  max="2018-04-21" />
             </div>
         </div>
         
