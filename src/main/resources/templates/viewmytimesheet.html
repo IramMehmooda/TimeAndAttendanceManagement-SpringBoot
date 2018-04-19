@@ -15,7 +15,7 @@
             <td> start date</td>
             <td>from time</td>
             <td> to time</td>
-            <td>project</td>
+            <td th:if="${User != null and User.getDiscriminatorValue() != 'admin'}">project</td>
             <td> no of hours</td>
             <td> <a href="/createtimesheet"> Add timesheet</a> </td>
           </tr>
@@ -28,8 +28,9 @@
             <td th:text="${timesheet.timesheet_id}">1</td>
             <td th:text="${timesheet.startdate}">sdfs</td>
             <td th:text="${timesheet.fromtime}">1ssdfd</td>
+            <td th:text="${timesheet.fromtime}">1ssdfd</td>
             <td th:text="${timesheet.noofhours}">1ssdfd</td>
-            <td th:text="${timesheet.project.project_id}">1sfsdffdd</td>
+            <td th:if="${User != null and User.getDiscriminatorValue() != 'admin'}" th:text="${timesheet.project.project_id}">1sfsdffdd</td>
             <td>
           <form action="#" th:action="@{'/viewmytimesheet?timesheet_id={timesheet_id}'(timesheet_id=${timesheet.timesheet_id})}" th:method="delete" >
 			  <button type="submit">Delete</button>

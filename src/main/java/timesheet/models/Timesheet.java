@@ -129,6 +129,15 @@ public class Timesheet {
 	public Timesheet() {
 		super();
 	}
+
+	public Timesheet(User user, Date startdate, Date fromtime, Date totime, double noofhours) {
+		super();
+		this.user = user;
+		this.startdate = startdate;
+		this.fromtime = fromtime;
+		this.totime = totime;
+		this.noofhours = noofhours;
+	}
 	
 	
 

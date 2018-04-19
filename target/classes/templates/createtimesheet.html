@@ -35,7 +35,7 @@
                 <input id="totime" type="time"  th:value="${#dates.format(timesheet.totime, timeFormat)}" name="totime"  step="900" />
             </div>
         </div>
-        <div class="form-group">
+        <div  class="form-group" th:if="${User != null and User.getDiscriminatorValue() != 'admin'}">
 
             Project: 
             <select class="form-control" th:field="*{project}">

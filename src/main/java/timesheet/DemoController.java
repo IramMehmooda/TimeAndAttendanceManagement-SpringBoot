@@ -288,7 +288,7 @@ public class DemoController {
         	model.addAttribute(project);
         	
         	Supervisor supervisor = new Supervisor();
-        	model.addAttribute(supervisor);
+        	model.addAttribute("supervisor",supervisor);
         	List<Supervisor> supervisors = (List<Supervisor>) supervisorStore.findAll();
         	model.addAttribute("supervisors",supervisors);
         	//model.addAttribute("supervisor", supervisor);

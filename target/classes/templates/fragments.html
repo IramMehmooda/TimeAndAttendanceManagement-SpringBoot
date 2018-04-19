@@ -56,7 +56,7 @@
                         <a href="#" th:href="@{/maintainprojects}" >Maintain Projects</a>
                     </li>
                     
-                    <li th:classappend="${page == 'manageproject' ? 'active' : ''}"  th:if="${User != null and User.getDiscriminatorValue() == 'supervisor'}">
+                    <li th:classappend="${page == 'manageproject' ? 'active' : ''}"  th:if="${User != null and User.getDiscriminatorValue() != 'employee'}">
                         <a href="#" th:href="@{/manageproject}">Manage Project</a>
                     </li>
                     <li th:classappend="${page == 'generatesummary' ? 'active' : ''}"  th:if="${User != null and User.getDiscriminatorValue() == 'supervisor'}">
