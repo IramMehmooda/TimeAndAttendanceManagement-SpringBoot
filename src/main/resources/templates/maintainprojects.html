@@ -34,8 +34,16 @@
             <td>
           <form action="#" th:action="@{'/maintainprojects?title={title}'(title=${project.title})}" th:method="delete" >
 			  <button type="submit">Delete</button>
+			  
 		  </form>
+		  </td>
+		  <td>
+          <a th:href="@{'/maintainprojects?title={title}' (title = ${project.title}) }">Edit project</a>
         </td>
+<!--         <td> -->
+<!--           <a action="#" th:action="@{'/manageempproject?title={title}' (title = ${project.title}) }">Edit project</a> -->
+<!--         </td> -->
+        
         <!-- <td>
           <form action="#" th:action="@{/maintainemployees/edit/}+${emp.username}">
 			  <button type="submit">Edit</button>

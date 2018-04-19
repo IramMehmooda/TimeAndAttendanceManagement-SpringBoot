@@ -201,6 +201,62 @@ public class ProjectController {
 	    		
 			
 		}
+	    
+	   /* @RequestMapping(value="/maintainprojects", method=RequestMethod.GET)
+		public void show(String title,Model model) {
+	    		     	
+        	 Project project = projectStore.findByTitle(title);
+        	 model.addAttribute("project", project);
+        	 System.out.println(project.getEmplist());
+        	 List<Supervisor> supervisors = (List<Supervisor>) supervisorStore.findAll();
+         	model.addAttribute("supervisors",supervisors);
+        	
+        	List<Employee> allemployees = employeeStore.findAll();
+        			
+        		
+        		
+        	
+        	model.addAttribute("employees", allemployees);
+	    		//System.out.println(pid + "Hi i am here");
+	    		//projectStore.findBySupervisor(supervisor)
+	    	     //showManageProject(model);
+        	
+			
+		}*/
+	    
+	    @PostMapping("/maintainprojects")
+	    public String edit(@ModelAttribute("project") ProjectCreateRequest project,@ModelAttribute("supervisor") String supervisorname,@ModelAttribute("emplist") String employees,Model model , BindingResult result) {
+	    	if(!result.hasErrors()) {
+	    		long budget = (long)project.getBudget();
+	    		String title = project.getTitle();
+	    		String customer = project.getCustomer();
+	    		System.out.println(project.getCustomer());
+	    		System.out.println(project.getSupervisorname());
+	    		System.out.println(employees +"yes got it");
+	    		Supervisor supervisor = supervisorStore.findByUsername(supervisorname);
+	    		System.out.println(project.getEmplist() + "value of emplist");
+	    		
+	    		System.out.println(title+" hello");
+	    		 Project p1 = projectStore.findByTitle(title);
+	    		 
+	    		// p1.setCustomer(project.getCustomer());
+	    		 for(Employee useremp : project.getEmplist()) {
+	    		 for(Employee emp : p1.getEmplist()) {
+	    			 if(emp.getUser_id()==useremp.getUser_id())
+	    				 project.getEmplist().remove(emp);
+	    		 }
+	    		 }
+	    		 p1.getEmplist().addAll(project.getEmplist());
+	    		 //p1.getEmplist().addAll(project.getEmplist());
+	    		 
+	    		 projectStore.save(p1);
+	    		
+	    		
+	    		//projectStore.save(new Project(title,budget,customer,supervisor,null));
+	    		//save project
+	    	}
+	    	return "redirect:/";
+	    }
 	 
 
 }

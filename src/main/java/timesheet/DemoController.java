@@ -196,7 +196,7 @@ public class DemoController {
     public String processRegister(@RequestParam(value = "fullname") String fullName,
                                   @RequestParam(value = "username") String userName,
                                   @RequestParam(value = "password") String password,
-                                  @RequestParam(value = "type") String user_type,
+                                  //@RequestParam(value = "type") String user_type,
                                   @RequestParam(value= "address") String address,
                                   @RequestParam(value="email") String email,
                                   @RequestParam(value="phoneno") long phone_no,
