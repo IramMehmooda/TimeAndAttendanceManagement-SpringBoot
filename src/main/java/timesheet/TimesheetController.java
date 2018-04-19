@@ -68,7 +68,7 @@ public class TimesheetController {
 	
 	
 	
-    @GetMapping(value="/createTimesheet")
+    @GetMapping(value="/createtimesheet")
     public String addTimeSheetForm(Model model) {
     	 if (model.asMap().containsKey("User")) {
     		
@@ -96,7 +96,7 @@ public class TimesheetController {
  	        	model.addAttribute("timesheet", new Timesheet());
  	        	
  	        	
-    		 return "createTimesheet";
+    		 return "createtimesheet";
     	 }
     	 else {
     	      	
@@ -106,11 +106,11 @@ public class TimesheetController {
     }
     
     
-    @PostMapping("/createtimesheet/{id}")
-    public String createTimesheet(Object obj, @ModelAttribute("timesheet") TsCreateRequest timesheet ,@ModelAttribute("dailyentry") DailyEntryCreateRequest dailyentry , Model model, BindingResult result) {
+    @PostMapping("/createtimesheet")
+    public String createTimesheet(@ModelAttribute("timesheet") TsCreateRequest timesheet ,@ModelAttribute("dailyentry") DailyEntryCreateRequest dailyentry , Model model, BindingResult result) {
     	
     	if(!result.hasErrors()) {
-    		if(obj instanceof Timesheet) {
+    		if(dailyentry == null) {
     		User user = (User) model.asMap().get("User");
     		//Employee employee = employeeStore.findByUsername(user.getUsername());
     		Date date=timesheet.getStartdate();
@@ -121,7 +121,7 @@ public class TimesheetController {
     		ts1.setUser(user);
     		System.out.println(timesheetStore.save(ts1));
     		}
-    		else if(obj instanceof DailyEntry) {
+    		else {
     			User user = (User) model.asMap().get("User");
         		//Employee employee = employeeStore.findByUsername(user.getUsername());
         		Date date=timesheet.getStartdate();
@@ -136,9 +136,10 @@ public class TimesheetController {
         		de.setTotime(dailyentry.getTotime());
         		de.setProject(dailyentry.getProject());
         		dailyEntryStore.save(de);
+        		model.addAttribute("dailyentry", null);
     		}
    	}
-    	return "redirect:/";
+    	return "/createtimesheet";
     
     }
     
