@@ -142,7 +142,7 @@ public class DemoController {
             	else if (user instanceof Supervisor)
             		userType = "Supervisor";
             	
-                model.addAttribute("message", user.getUsername() + ": welcome back !" + "\n You have logged in as "+userType + user.getDiscriminatorValue());
+                model.addAttribute("message", user.getUsername() + ": welcome back !" + "\n You have logged in as "+userType );
                 model.addAttribute("User", user);
                 return "content";
             } else {
@@ -226,6 +226,33 @@ public class DemoController {
     	}
         
     }
+    
+    @PostMapping("/editregister")
+    public String processeditRegister(@ModelAttribute("employee") Employee employee,
+                                  //@RequestParam(value="user_type") String user_type,
+                                  Model model) {
+    	try {
+    		User user = (User) model.asMap().get("User");
+            if (user != null) {
+                model.addAttribute("message", "Username already available, please try other username");
+                return "register";
+            } else {
+            	
+            		 userStore.save(employee);
+                     model.addAttribute("message", "Employee successfully edited: " + employee.getUsername());
+                    // userStore.save(new Admin(userName, password, fullName));
+            	
+            	
+            		
+            	return "content";
+            }
+    		
+    	}catch(Exception ex) {
+    		return "user not found"+ex.getMessage();
+    	}
+        
+    }
+
 
     
     
