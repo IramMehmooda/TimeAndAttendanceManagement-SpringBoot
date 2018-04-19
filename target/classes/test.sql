@@ -56,7 +56,7 @@ insert into user(username,password,user_type,fullname,address,email,phone_no,job
 select * from timesheet;
 
 
-insert into timesheet(fromtime,noofhours,totime,project_project_id,startdate,user_user_id) values(DATETIME '2018-03-18 09:00',1,DATE '06:00:00',5001,DATE '2018-04-16',1003);
+insert into timesheet(fromtime,noofhours,totime,project_project_id,startdate,user_user_id) values(DATE '2018-03-18 09:00',1,DATE '06:00:00',5001,DATE '2018-04-16',1003);
 
 
 
