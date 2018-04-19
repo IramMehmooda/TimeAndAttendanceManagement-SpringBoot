@@ -37,6 +37,7 @@ import timesheet.models.Timesheet;
 import timesheet.models.TimesheetStore;
 import timesheet.models.User;
 import timesheet.models.UserStore;
+import timesheet.service.DailyEntryCreateRequest;
 import timesheet.service.ProjectCreateRequest;
 import timesheet.service.TsCreateRequest;
 
@@ -105,24 +106,67 @@ public class TimesheetController {
     }
     
     
-    @PostMapping("/createtimesheet")
-    public String createTimesheet(@ModelAttribute("timesheet") TsCreateRequest timesheet , Model model, BindingResult result) {
+    @PostMapping("/createtimesheet/{id}")
+    public String createTimesheet(Object obj, @ModelAttribute("timesheet") TsCreateRequest timesheet ,@ModelAttribute("dailyentry") DailyEntryCreateRequest dailyentry , Model model, BindingResult result) {
     	
     	if(!result.hasErrors()) {
+    		if(obj instanceof Timesheet) {
+    		User user = (User) model.asMap().get("User");
+    		//Employee employee = employeeStore.findByUsername(user.getUsername());
     		Date date=timesheet.getStartdate();
-    		String title = project.getTitle();
-    		String customer = project.getCustomer();
-    		System.out.println(project.getCustomer());
-    		System.out.println(project.getSupervisorname());
-    		System.out.println(employees +"yes got it");
-    		Supervisor supervisor = supervisorStore.findByUsername(supervisorname);
-    		
-    		projectStore.save(new Project(title,budget,customer,supervisor,null));
-    		//save project
-    	}
+    		System.out.println(date);
+    		System.out.println(timesheet.getStartdate());
+    		Timesheet ts1 = new Timesheet();
+    		ts1.setStartdate(timesheet.getStartdate());
+    		ts1.setUser(user);
+    		System.out.println(timesheetStore.save(ts1));
+    		}
+    		else if(obj instanceof DailyEntry) {
+    			User user = (User) model.asMap().get("User");
+        		//Employee employee = employeeStore.findByUsername(user.getUsername());
+        		Date date=timesheet.getStartdate();
+        		System.out.println(date);
+        		System.out.println(timesheet.getStartdate());
+        		System.out.println("in the daily entries" + dailyentry.getFromtime() + "asdf   " + dailyentry.getTotime());
+        		System.out.println(dailyentry.getProject());
+        		Timesheet timesheet1 = timesheetStore.findByUser(user);
+        		DailyEntry de = new DailyEntry();
+        		de.setFromtime(dailyentry.getFromtime());
+        		de.setTimesheet(timesheet1);
+        		de.setTotime(dailyentry.getTotime());
+        		de.setProject(dailyentry.getProject());
+        		dailyEntryStore.save(de);
+    		}
+   	}
     	return "redirect:/";
     
-} 	
+    }
+    
+  /*  @PostMapping("/createtimesheet")
+    public String createentries(@ModelAttribute("timesheet") TsCreateRequest timesheet,@ModelAttribute("dailyentry") DailyEntryCreateRequest dailyentry , Model model, BindingResult result) {
+    	
+    	if(!result.hasErrors()) {
+    		User user = (User) model.asMap().get("User");
+    		//Employee employee = employeeStore.findByUsername(user.getUsername());
+    		Date date=timesheet.getStartdate();
+    		System.out.println(date);
+    		System.out.println(timesheet.getStartdate());
+    		System.out.println("in the daily entries" + dailyentry.getFromtime() + "asdf   " + dailyentry.getTotime());
+    		System.out.println(dailyentry.getProject());
+    		Timesheet timesheet1 = timesheetStore.findByUser(user);
+    		DailyEntry de = new DailyEntry();
+    		de.setFromtime(dailyentry.getFromtime());
+    		de.setTimesheet(timesheet1);
+    		de.setTotime(dailyentry.getTotime());
+    		de.setProject(dailyentry.getProject());
+    		dailyEntryStore.save(de);
+    		
+   	}
+    	return "redirect:/";
+    
+    }*/
+
+}
     	
     	
     	

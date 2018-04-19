@@ -74,7 +74,7 @@ public class DailyEntry {
 		return fromtime;
 	}
 
-	public void setFromtime(Time fromtime) {
+	public void setFromtime(Date fromtime) {
 		this.fromtime = fromtime;
 	}
 
@@ -82,7 +82,7 @@ public class DailyEntry {
 		return totime;
 	}
 
-	public void setTotime(Time totime) {
+	public void setTotime(Date totime) {
 		this.totime = totime;
 	}
 
