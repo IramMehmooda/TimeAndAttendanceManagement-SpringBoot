@@ -29,6 +29,8 @@ import timesheet.models.SupervisorStore;
 import timesheet.models.TimesheetStore;
 import timesheet.models.User;
 import timesheet.models.UserStore;
+import timesheet.service.EmployeeCreateReq;
+import timesheet.service.ProjectCreateRequest;
 
 @Controller
 @SessionAttributes({"User"})
@@ -98,7 +100,7 @@ public class EmployeeController {
 			
 		}
 	    
-	    @PostMapping("/editemployee")
+	   /* @PostMapping("/editemployee")
 	    public String processeditingEmployee(@ModelAttribute("employee")  Employee employee,Model model, BindingResult result) {
 	    	try {
 	    		
@@ -106,12 +108,12 @@ public class EmployeeController {
 	    		
 	    		//Employee employee1= employeeStore.findByUsername(userName);
 	    		System.out.println("Employee is inside post mapping");
-	    		/* if (user != null) {
+	    		 if (user != null) {
 	                model.addAttribute("message", "Username already available, please try other username");
 	                return "register";
 	            } else {
 	            //new Employee(userName, password,fullName, address, email, phone_no, job_title, salary, sSN)
-	            	*/
+	            	
 	            		 userStore.save(employee);
 	                     model.addAttribute("message", "Employee : " + employee + "modified");
 	                    // userStore.save(new Admin(userName, password, fullName));
@@ -125,7 +127,48 @@ public class EmployeeController {
 	    		return "user not found"+ex.getMessage();
 	    	}
 	        
+	    }*/
+	    
+	    
+	    @PostMapping("/editemployee")
+	    public String editEmployeeregister(@ModelAttribute("employee") EmployeeCreateReq employee,Model model , BindingResult result) {
+	    	if(!result.hasErrors()) {
+	    		
+	    		System.out.println(employee.toString());
+	    		Employee employeesave = new Employee();
+	    		employeeStore.save(employeesave);
+	    		
+	    		/*long budget = (long)project.getBudget();
+	    		String title = project.getTitle();
+	    		String customer = project.getCustomer();
+	    		
+	    		Supervisor supervisor = supervisorStore.findByUsername(supervisorname);
+	    	
+	    		
+	    		
+	    		 Project p1 = projectStore.findByTitle(title);
+	    		 
+	    		// p1.setCustomer(project.getCustomer());
+	    		 for(Employee useremp : project.getEmplist()) {
+	    		 for(Employee emp : p1.getEmplist()) {
+	    			 if(emp.getUser_id()==useremp.getUser_id())
+	    				 project.getEmplist().remove(emp);
+	    		 }
+	    		 }
+	    		 p1.getEmplist().addAll(project.getEmplist());
+	    		 //p1.getEmplist().addAll(project.getEmplist());
+	    		 
+	    		 projectStore.save(p1);*/
+	    		
+	    		
+	    		//projectStore.save(new Project(title,budget,customer,supervisor,null));
+	    		//save project
+	    	}
+	    	return "home";
 	    }
+	   
+
+
 	    
 	    @GetMapping(value="/editemployee/{username}")
 	    public String editEmployee(@PathVariable("username") String username , Model model) {
